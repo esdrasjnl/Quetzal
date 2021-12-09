@@ -1,71 +1,152 @@
-/**
- * Ejemplo mi primer proyecto con Jison utilizando Nodejs en Ubuntu
- */
+/*IMPORTS DEFINITION*/
+%{
+	const {Exception, ExceptionType, exceptionList} = require('../src/exceptions/Exception');
+	const {Token, Name, VariableType, FunctionType} = require('../src/ast/NodeData');	
+%}
 
-/* Definición Léxica */
+/* TERMINALS DEFINITION */
 %lex
 
-%options case-insensitive
+%options case-sensitive
 
 %%
-
-"Evaluar"           return 'REVALUAR';
-";"                 return 'PTCOMA';
-"("                 return 'PARIZQ';
-")"                 return 'PARDER';
-"["                 return 'CORIZQ';
-"]"                 return 'CORDER';
-
-"+"                 return 'MAS';
-"-"                 return 'MENOS';
-"*"                 return 'POR';
-"/"                 return 'DIVIDIDO';
-
-/* Espacios en blanco */
+/* SYMBOLS */
+"."                  return 'dot';
+","                  return 'comma';
+":"                  return 'colon';
+";"                  return 'semicolon';
+"("                  return 'open_par';
+")"                  return 'close_par';
+"["                  return 'open_bracket';
+"]"                  return 'close_bracket';
+"{"                  return 'open_brace';
+"}"                  return 'close_brace';
+"#"                  return 'copy';
+/* ARITHMETIC OPERATORS */
+"+"                  return 'plus';
+"-"                  return 'minus';
+"*"                  return 'multiply';
+"/"                  return 'divide';
+"%"                  return 'percent';
+/* RESERVED WORDS */
+"null"               return 'null';
+"int"                return 'int';
+"double"             return 'double';
+"boolean"            return 'boolean';
+"char"               return 'char';
+"String"             return 'string';
+"struct"             return 'struct';
+"void"               return 'void';
+/* NATIVE FUNCTIONS */
+"pow"                return 'power';
+"sqrt"               return 'sqrt_root';
+"sin"                return 'sine';
+"cos"                return 'cosine';
+"tan"                return 'tangent';
+"log10"              return 'logarithm';
+"parse"              return 'parse';
+"toInt"              return 'to_int';
+"toDouble"           return 'to_double';
+"string"             return 'to_string';
+"typeof"             return 'type_of';
+"print"              return 'print';
+"println"            return 'print_ln';
+"push"               return 'push';
+"pop"                return 'pop';
+"characterOfPosition" return 'char_at';
+"subString"          return 'substring';
+"length"             return 'length';
+"toUppercase"        return 'to_upper_case';
+"toLowercase"        return 'to_lower_case';
+/* LOGIC OPERATORS */
+"=="                 return 'equals';
+"!="                 return 'different';
+"<"                  return 'less_than';
+/* RELATIONAL OPERATORS */
+">"                  return 'greater_than';
+"<="                 return 'less_than_or_equal';
+">="                 return 'greater_than_or_equal';
+"&&"                 return 'and';
+"||"                 return 'or';
+"!"                  return 'not';
+"?"                  return 'ternary';
+/* STRING OPERATORS */ 
+"&"                  return 'concat';
+"^"                  return 'repeat';
+"$"                  return 'value';
+/* CONDITIONALS */
+"if"                 return 'if';
+"else"               return 'else';
+"switch"             return 'switch';
+"case"               return 'case';
+"default"            return 'default';
+/* LOOPS */
+"while"              return 'while';
+"do"                 return 'do';
+"for"                return 'for';
+"in"                 return 'in';
+/* BLANKSPACES */
 [ \r\t]+            {}
 \n                  {}
-
-[0-9]+("."[0-9]+)?\b    return 'DECIMAL';
-[0-9]+\b                return 'ENTERO';
+/* REGEX */
+[0-9]+("."[0-9]+)?\b    return 'DOUBLE';
+[0-9]+\b                return 'INTEGER';
 
 <<EOF>>                 return 'EOF';
 
-.                       { console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column); }
+. {
+	/*ADD NODE FOR LEXICAL EXCEPTION*/
+	exceptionList.push(new Exception(new Node(), ExceptionType.LEXICAL, ""));
+	console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column);
+}
+
 /lex
 
-/* Asociación de operadores y precedencia */
+/* OPERATORS PRECEDENCE AND ASSOCIATION */
 
-%left 'MAS' 'MENOS'
-%left 'POR' 'DIVIDIDO'
-%left UMENOS
+%left 'plus' 'minus'
+%left 'multiply' 'divide'
+%left uminus
 
-%start ini
+%start START
 
-%% /* Definición de la gramática */
+%% /* RULES DEFINITION */
 
-ini
-	: instrucciones EOF
+START: 
+	INSTRUCTIONS EOF
 ;
 
-instrucciones
-	: instruccion instrucciones
-	| instruccion
-	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+INSTRUCTIONS
+	: INSTRUCTION INSTRUCTIONS
+	| INSTRUCTION
 ;
 
-instruccion
-	: REVALUAR CORIZQ expresion CORDER PTCOMA {
+INSTRUCTION
+	: power open_bracket EXPRESSION close_bracket semicolon {
 		console.log('El valor de la expresión es: ' + $3);
+	}
+	| error semicolon {
+		$$ = 
+		console.error('Este es un error sintáctico: ' + $1 + ', en la linea: ' + @1.first_line + ', en la columna: ' + (@1.first_column + 1));
 	}
 ;
 
-expresion
-	: MENOS expresion %prec UMENOS  { $$ = $2 *-1; }
-	| expresion MAS expresion       { $$ = $1 + $3; }
-	| expresion MENOS expresion     { $$ = $1 - $3; }
-	| expresion POR expresion       { $$ = $1 * $3; }
-	| expresion DIVIDIDO expresion  { $$ = $1 / $3; }
-	| ENTERO                        { $$ = Number($1); }
-	| DECIMAL                       { $$ = Number($1); }
-	| PARIZQ expresion PARDER       { $$ = $2; }
+EXPRESSION
+	: minus EXPRESSION %prec uminus {
+		$$ = $2 *-1;
+	} | EXPRESSION plus EXPRESSION {
+		$$ = $1 + $3;
+	} | EXPRESSION minus EXPRESSION {
+		$$ = $1 - $3;
+	} | EXPRESSION multiply EXPRESSION {
+		$$ = $1 * $3;
+	} | EXPRESSION divide EXPRESSION {
+		$$ = $1 / $3;
+	} | INTEGER {
+		$$ = Number($1);
+	} | DOUBLE {
+		$$ = Number($1);
+	} | open_par EXPRESSION close_par {
+		$$ = $2;
+	}
 ;
