@@ -1,7 +1,6 @@
 /*IMPORTS DEFINITION*/
 %{
-	const {Exception, ExceptionType, exceptionList} = require('../src/exceptions/Exception');
-	const {Token, Name, VariableType, FunctionType} = require('../src/ast/NodeData');	
+	//import {Exception, ExceptionType, exceptionList} from "../src/ast/NodeData";
 %}
 
 /* TERMINALS DEFINITION */
@@ -95,9 +94,7 @@
 <<EOF>>                 return 'EOF';
 
 . {
-	/*ADD NODE FOR LEXICAL EXCEPTION*/
-	exceptionList.push(new Exception(new Node(), ExceptionType.LEXICAL, ""));
-	console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column);
+	Exception.exceptionList.push(new Exception(new Node_(null, $yytext, yylloc.first_line, (yylloc.first_column + 1), null, false, false), ExceptionType.LEXICAL));
 }
 
 /lex
@@ -126,8 +123,7 @@ INSTRUCTION
 		console.log('El valor de la expresión es: ' + $3);
 	}
 	| error semicolon {
-		$$ = 
-		console.error('Este es un error sintáctico: ' + $1 + ', en la linea: ' + @1.first_line + ', en la columna: ' + (@1.first_column + 1));
+		Exception.exceptionList.push(new Exception(new Node_(null, $1, @1.first_line, (@1.first_column + 1), null, false, false), ExceptionType.SYNTACTIC));
 	}
 ;
 

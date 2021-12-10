@@ -20,7 +20,7 @@ function analizaQuetAsc() {
         result = grammar.parse(editor.getValue());
         console.log(result);
     } catch (error) {
-        
+        console.error(error.value);
     }
 }
 

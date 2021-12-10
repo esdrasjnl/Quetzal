@@ -1,18 +1,17 @@
-import { Token } from "./NodeData";
-import { Name } from "./NodeData";
-import { VariableType } from "./NodeData";
-import { FunctionType } from "./NodeData";
-
-export abstract class Node{
-    private token: Token;
-    private variableTypy: VariableType;
-    private children: Array<Node>;
+abstract class Node_{
+    public data: NodeData;
+    public value: string;
+    public line: number;
+    public column: number;
+    private children: Array<Node_>;
     private isVariable: boolean;
     private isFunction: boolean;
 
-    constructor (token: Token, name: Name, variableType: VariableType, children: Array<Node>, isFunction: boolean, isVariable: boolean){
-        this.token = token;
-        this.variableTypy = variableType;
+    constructor (data: NodeData, value:string, line: number, column: number, children: Array<Node_>, isFunction: boolean, isVariable: boolean){
+        this.data = data;
+        this.value = value;
+        this.line = line;
+        this.column = column;
         this.children = children;
         this.isFunction = isFunction;
         this.isVariable = isVariable;

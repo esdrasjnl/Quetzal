@@ -1,112 +1,15 @@
-export enum Token {
-    UNKNOWN,
-    SYMBOL,
-    ARITHMETIC,
-    TYPE,
-    NATIVE_MATH_FUNCTION,
-    NATIVE_TYPE_FUNCTION,
-    NATIVE_STRING_FUNCTION,
-    NATIVE_ARRAY_FUNCTION,
-    RELATIONAL,
-    LOGIC,
-    STRING_OPERATOR,
-    CONDITIONAL,
-    LOOP,
-    INSTRUCTION
-}
+abstract class NodeData{
+    private functionType: number;
+    private name: number;
+    private returnType: number;
+    private token: number;
+    private variableType: number;
 
-export enum Name {
-    DOT,
-    COMMA,
-    COLON,
-    SEMICOLON,
-    OPEN_PAR,
-    CLOSE_PAR,
-    OPEN_BRACKET,
-    CLOSE_BRACKET,
-    OPEN_BRACE,
-    CLOSE_BRACE,
-    COPY,
-    PLUS,
-    MINUS,
-    TIMES,
-    DIVIDED,
-    PERCENT,
-    NULL,
-    INTEGER,
-    DOUBLE,
-    BOOLEAN,
-    CHAR,
-    STRING,
-    STRUCT,
-    POWER,
-    SQRT_ROOT,
-    SINE,
-    COSINE,
-    TANGENT,
-    LOGARITHM,
-    PARSE,
-    TO_INT,
-    TO_DOUBLE,
-    TO_STRING,
-    TYPE_OF,
-    PRINT,
-    PRINT_LN,
-    PUSH,
-    POP,
-    EQUALS,
-    DIFFERENT,
-    LESS_THAN,
-    GREATER_THAN,
-    LESS_THAN_OR_EQUAL,
-    GREATER_THAN_OR_EQUAL,
-    AND,
-    OR,
-    NOT,
-    TERNARY,
-    CONCAT,
-    REPEAT,
-    VALUE,
-    CHAR_AT,
-    SUBSTRING,
-    LENGTH,
-    TO_UPPER_CASE,
-    TO_LOWER_CASE,
-    IF,
-    ELSE,
-    SWITCH,
-    CASE,
-    DEFAULT,
-    WHILE,
-    DO,
-    FOR,
-    ASSIGNMENT,
-    DECLARATION,
-    CALL_TO_FUNCTION,
-    FUNCTION,
-    ARRAY,
-    VOID,
-    IN
-}
-
-export enum VariableType{
-    PRIMITIVE,
-    ARRAY,
-    STRUCT
-}
-
-export enum FunctionType{
-    VOID,
-    TYPED
-}
-
-export enum ReturnType{
-    //NULL,
-    INTEGER,
-    DOUBLE,
-    BOOLEAN,
-    STRING,
-    CHAR,
-    STRUCT,
-    ARRAY
+    constructor(functionType: number, name: number, returnType: number, token: number, variableType: number){
+        this.functionType = functionType;
+        this.name = name;
+        this.returnType = returnType;
+        this.token = token;
+        this.variableType = variableType;
+    }
 }

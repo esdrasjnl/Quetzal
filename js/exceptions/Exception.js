@@ -1,17 +1,14 @@
+"use strict";
 class Exception extends Node_ {
-    public static exceptionList = new Array<Node_>();
-    private symbol: Node_;
-    private type: number;
-
-    constructor (symbol: Node_, type: number) {
+    constructor(symbol, type) {
         super(symbol.data, symbol.value, symbol.line, symbol.column, new Array(), false, false);
         this.symbol = symbol;
         this.type = type;
     }
-
-    private static print(){
+    static print() {
         this.exceptionList.forEach(exception => {
             console.error();
         });
     }
 }
+Exception.exceptionList = new Array();
