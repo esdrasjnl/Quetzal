@@ -1,11 +1,12 @@
 "use strict";
 class Node_ {
-    constructor(data, value, line, column, children, isFunction, isVariable) {
-        this.data = data;
+    constructor(name, value, line, column, children, data, isFunction, isVariable) {
+        this.name = name;
         this.value = value;
         this.line = line;
         this.column = column;
         this.children = children;
+        this.data = data;
         this.isFunction = isFunction;
         this.isVariable = isVariable;
     }

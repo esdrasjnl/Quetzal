@@ -1,18 +1,20 @@
 abstract class Node_{
-    public data: NodeData;
+    public name: number;
     public value: string;
     public line: number;
     public column: number;
-    private children: Array<Node_>;
+    public children: Array<Node_>;
+    public data: NodeData;
     private isVariable: boolean;
     private isFunction: boolean;
 
-    constructor (data: NodeData, value:string, line: number, column: number, children: Array<Node_>, isFunction: boolean, isVariable: boolean){
-        this.data = data;
+    constructor (name: number, value:string, line: number, column: number, children: Array<Node_>, data: NodeData, isFunction: boolean, isVariable: boolean){
+        this.name = name;
         this.value = value;
         this.line = line;
         this.column = column;
         this.children = children;
+        this.data = data;
         this.isFunction = isFunction;
         this.isVariable = isVariable;
     }

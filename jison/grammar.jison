@@ -94,7 +94,8 @@
 <<EOF>>                 return 'EOF';
 
 . {
-	Exception.exceptionList.push(new Exception(new Node_(null, $yytext, yylloc.first_line, (yylloc.first_column + 1), null, false, false), ExceptionType.LEXICAL));
+	var e = new Exception(yytext, yylloc.first_line, (yylloc.first_column + 1), ExceptionType.LEXICAL);
+	Exception.exceptionList.push(e);
 }
 
 /lex
@@ -123,7 +124,8 @@ INSTRUCTION
 		console.log('El valor de la expresión es: ' + $3);
 	}
 	| error semicolon {
-		Exception.exceptionList.push(new Exception(new Node_(null, $1, @1.first_line, (@1.first_column + 1), null, false, false), ExceptionType.SYNTACTIC));
+		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
+		Exception.exceptionList.push(e);
 	}
 ;
 

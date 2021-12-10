@@ -1,13 +1,12 @@
 "use strict";
 class Exception extends Node_ {
-    constructor(symbol, type) {
-        super(symbol.data, symbol.value, symbol.line, symbol.column, new Array(), false, false);
-        this.symbol = symbol;
+    constructor(value, line, column, type) {
+        super(NodeToken.UNKNOWN, value, line, column, new Array(), new NodeData(0, 0, 0, 0), false, false);
         this.type = type;
     }
     static print() {
         this.exceptionList.forEach(exception => {
-            console.error();
+            console.error(ExceptionType.type[exception.type] + " error: " + exception.value + " at line " + exception.line + " and column " + exception.column);
         });
     }
 }

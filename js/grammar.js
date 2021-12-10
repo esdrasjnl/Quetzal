@@ -91,7 +91,8 @@ var grammar = (function () {
                     break;
                 case 5:
 
-                    Exception.exceptionList.push(new Exception(new Node_(null, $$[$0 - 1], _$[$0 - 1].first_line, (_$[$0 - 1].first_column + 1), null, false, false), ExceptionType.SYNTACTIC));
+                    var e = new Exception($$[$0 - 1], _$[$0 - 1].first_line, (_$[$0 - 1].first_column + 1), ExceptionType.SYNTACTIC);
+                    Exception.exceptionList.push(e);
 
                     break;
                 case 6:
@@ -854,7 +855,8 @@ var grammar = (function () {
                     case 70: return 5;
                         break;
                     case 71:
-                        Exception.exceptionList.push(new Exception(new Node_(null, $yy_.yytext, yy_.yylloc.first_line, (yy_.yylloc.first_column + 1), null, false, false), ExceptionType.LEXICAL));
+                        var e = new Exception(yy_.yytext, yy_.yylloc.first_line, (yy_.yylloc.first_column + 1), ExceptionType.LEXICAL);
+                        Exception.exceptionList.push(e);
 
                         break;
                 }

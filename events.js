@@ -19,8 +19,10 @@ function analizaQuetAsc() {
         document.getElementById("console").value = "";
         result = grammar.parse(editor.getValue());
         console.log(result);
+        Exception.print();
+        Exception.exceptionList = [];
     } catch (error) {
-        console.error(error.value);
+      
     }
 }
 
@@ -31,7 +33,7 @@ function analizaXMLDesc() {
       result = XmlDesc.parse(editor.getValue());
       console.log(result);
   } catch (error) {
-      
+    
   }
 }
 
