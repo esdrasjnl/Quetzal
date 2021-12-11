@@ -9,5 +9,10 @@ class Exception extends Node_ {
             console.error(ExceptionType.type[exception.type] + " error: " + exception.value + " at line " + exception.line + " and column " + exception.column);
         });
     }
+    run() {
+    }
+    translate() {
+        return "";
+    }
 }
 Exception.exceptionList = new Array();

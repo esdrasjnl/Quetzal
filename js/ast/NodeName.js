@@ -74,6 +74,8 @@ NodeName.FUNCTION = 68;
 NodeName.ARRAY = 69;
 NodeName.VOID = 70;
 NodeName.IN = 71;
+NodeName.EXPRESSION = 72;
+NodeName.PRIMITIVE_DATA = 73;
 NodeName.nodeName = [
     "DOT",
     "COMMA",
@@ -146,4 +148,6 @@ NodeName.nodeName = [
     "ARRAY",
     "VOID",
     "IN",
+    "EXPRESSION",
+    "PRIMITIVE_DATA"
 ];
