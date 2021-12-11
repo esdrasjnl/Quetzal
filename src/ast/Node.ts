@@ -1,6 +1,6 @@
 abstract class Node_{
     public name: number;
-    public value: string;
+    public value: any;
     public line: number;
     public column: number;
     public children: Array<Node_>;
@@ -8,7 +8,7 @@ abstract class Node_{
     private isVariable: boolean;
     private isFunction: boolean;
 
-    constructor (name: number, value:string, line: number, column: number, children: Array<Node_>, data: NodeData, isFunction: boolean, isVariable: boolean){
+    constructor (name: number, value:any, line: number, column: number, children: Array<Node_>, data: NodeData, isFunction: boolean, isVariable: boolean){
         this.name = name;
         this.value = value;
         this.line = line;
@@ -18,4 +18,7 @@ abstract class Node_{
         this.isFunction = isFunction;
         this.isVariable = isVariable;
     }
+
+    abstract run(): any;
+    abstract translate(): string;
 }

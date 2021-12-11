@@ -70,6 +70,8 @@ class NodeName{
     public static readonly ARRAY = 69;
     public static readonly VOID = 70;
     public static readonly IN = 71;
+    public static readonly EXPRESSION = 72;
+    public static readonly PRIMITIVE_DATA = 73;
 
     public static readonly nodeName = [
         "DOT",
@@ -143,6 +145,8 @@ class NodeName{
         "ARRAY",
         "VOID",
         "IN",
+        "EXPRESSION",
+        "PRIMITIVE_DATA"
     ];
 
     constructor(){

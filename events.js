@@ -15,12 +15,12 @@ editor = CodeMirror.fromTextArea(document.getElementById("entrada"), config);
 
 function analizaQuetAsc() {
     try {
+        Exception.exceptionList = [];
         console.log("Ascendente");
         document.getElementById("console").value = "";
         result = grammar.parse(editor.getValue());
         console.log(result);
         Exception.print();
-        Exception.exceptionList = [];
     } catch (error) {
       
     }

@@ -143,8 +143,8 @@ EXPRESSION
 	} | INTEGER {
 		$$ = Number($1);
 	} | DOUBLE {
-		$$ = Number($1);
+		$$ = new PrimitiveData(NodeName.DOUBLE, Number($1), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
 	} | open_par EXPRESSION close_par {
-		$$ = $2;
+		$$ = new Expression([$2]);
 	}
 ;
