@@ -1,0 +1,25 @@
+{
+  "name": "quetzal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "events.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jison": "jison ./jison/grammar.jison && move grammar.js ./js/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esdrasjnl/Quetzal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esdrasjnl/Quetzal/issues"
+  },
+  "homepage": "https://github.com/esdrasjnl/Quetzal#readme",
+  "dependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0"
+  }
+}

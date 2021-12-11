@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>TytusX</title>
+    
+    <!-- VIZ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/viz.js" integrity="sha512-vnRdmX8ZxbU+IhA2gLhZqXkX1neJISG10xy0iP0WauuClu3AIMknxyDjYHEpEhi8fTZPyOCWgqUCnEafDB/jVQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/full.render.js" integrity="sha512-1zKK2bG3QY2JaUPpfHZDUMe3dwBwFdCDwXQ01GrKSd+/l0hqPbF+aak66zYPUZtn+o2JYi1mjXAqy5mW04v3iA==" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <section>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Quetzal</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Reportes <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Arboles
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" onclick="reporteAstAsc()">AST</a>
+                        <a class="dropdown-item" onclick="reporteAstDesc()">CST</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+    </header>
+
+    </section>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h2>Entrada</h2>
+                <textarea id="entrada" name="code" class="CodeMirror"></textarea>
+                <br>
+                <button type="button" class="btn btn-dark" onclick="analizaQuetAsc()">Analizar Ascendente</button>
+                <button type="button" class="btn btn-dark" onclick="analizaQuetDesc()">Analizar Descendente</button>
+        </div>
+        <div class="col">
+            <div class="content">
+                <h2>Salida</h2>
+                <textarea class="form-control" id="result" wrap='off' rows="11" readonly></textarea>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    <section>
+        <div class="container">
+            <h2>Consola</h2>
+            <textarea class="form-control" id="console" readonly></textarea>
+            <div id="clickedTab">
+                <h3>Reporte Ast</h3>
+            </div>
+        </div>
+        
+    </section>
+
+
+    <link rel="stylesheet" type="text/css" href="./codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="./codemirror/theme//ambiance.css">
+    <link rel="stylesheet" type="text/css" href="./codemirror/theme/solarized.css">
+    <script type="text/javascript" src="./codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="./codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="./codemirror/mode/xml/xml.js"></script>
+    
+    <script type="text/javascript" src="./events.js"></script>
+
+    <script type="text/javascript" src="js/ast/Node.js"></script>
+    <script type="text/javascript" src="js/ast/NodeData.js"></script>
+    <script type="text/javascript" src="js/ast/NodeFunctionType.js"></script>
+    <script type="text/javascript" src="js/ast/NodeName.js"></script>
+    <script type="text/javascript" src="js/ast/NodeReturnType.js"></script>
+    <script type="text/javascript" src="js/ast/NodeToken.js"></script>
+    <script type="text/javascript" src="js/ast/NodeVariableType.js"></script>
+
+    <script type="text/javascript" src="js/exceptions/Exception.js"></script>
+    <script type="text/javascript" src="js/exceptions/ExceptionType.js"></script>
+
+    <script type="text/javascript" src="js/expression/Expression.js"></script>
+    <script type="text/javascript" src="js/expression/PrimitiveData.js"></script>
+
+    <script type="text/javascript" src="js/grammar.js"></script>
+</body>
+<footer>
+
+</footer>
+</html>
