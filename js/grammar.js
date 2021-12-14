@@ -85,7 +85,8 @@ var $0 = $$.length - 1;
 switch (yystate) {
 case 4:
 
-		console.log('El valor de la expresión es: ' + $$[$0-2]);
+		//console.log('El valor de la expresión es: ' + $$[$0-2]);
+        document.getElementById("console").value = 'El valor de la expresión es: ' + $$[$0-2];
 	
 break;
 case 5:
@@ -127,13 +128,11 @@ break;
 case 12:
 
 		this.$ = new PrimitiveData(NodeName.DOUBLE, Number($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.DOUBLE);
-        console.log("Double: " + this.$);
 	
 break;
 case 13:
 
 		this.$ = new Expression([$$[$0-1]]);
-        console.log("Expresion: " + this.$);
 	
 break;
 }
