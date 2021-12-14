@@ -9,6 +9,10 @@
 %options case-sensitive
 
 %%
+/* COMMENTS */
+"//".*										// One line comment 
+[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]			// Multi-Line comment
+
 /* SYMBOLS */
 "."                  return 'dot';
 ","                  return 'comma';
@@ -21,6 +25,7 @@
 "{"                  return 'open_brace';
 "}"                  return 'close_brace';
 "#"                  return 'copy';
+"="					 return 'equal_simple';
 /* ARITHMETIC OPERATORS */
 "+"                  return 'plus';
 "-"                  return 'minus';
@@ -90,6 +95,7 @@
 /* REGEX */
 [0-9]+("."[0-9]+)?\b    return 'DOUBLE';
 [0-9]+\b                return 'INTEGER';
+(_[a-zA-Z])[a-zA-Z0-9_]* return 'IDENTIFIERT';
 
 <<EOF>>                 return 'EOF';
 
@@ -123,10 +129,22 @@ INSTRUCTION
 	: power open_bracket EXPRESSION close_bracket semicolon {
 		console.log('El valor de la expresión es: ' + $3);
 	}
+	| PRINT_INST
+	| STATEMENT_INST
 	| error semicolon {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
 		Exception.exceptionList.push(e);
 	}
+;
+
+PRINT_INST : PRINT2 open_par EXPRESSION close_par semicolon
+;
+
+PRINT2 : print
+	| print_ln
+;
+
+STATEMENT_INST : ATTRIBUTE equal_simple EXPRESSION semicolon
 ;
 
 EXPRESSION
@@ -147,4 +165,22 @@ EXPRESSION
 	} | open_par EXPRESSION close_par {
 		$$ = new Expression([$2]);
 	}
+;
+
+ATTRIBUTE_LIST
+	: ATTRIBUTE_LIST comma ATTRIBUTE {
+		//código para js
+	} | ATTRIBUTE
+;
+
+ATTRIBUTE 
+	: ATTRIBUTE_TYPE IDENTIFIERT
+;
+
+ATTRIBUTE_TYPE
+	: int
+	| double 
+	| boolean 
+	| char 
+	| string
 ;
