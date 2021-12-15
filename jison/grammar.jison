@@ -1,6 +1,6 @@
-/*IMPORTS DEFINITION*/
+/**/
 %{
-	//import {Exception, ExceptionType, exceptionList} from "../src/ast/NodeData";
+	
 %}
 
 /* TERMINALS DEFINITION */
@@ -31,12 +31,14 @@
 "-"                  return 'minus';
 "*"                  return 'multiply';
 "/"                  return 'divide';
-"%"                  return 'percent';
+"%"                  return 'percent';  
 /* RESERVED WORDS */
 "null"               return 'null';
 "int"                return 'int';
 "double"             return 'double';
 "boolean"            return 'boolean';
+"true"            	 return 'true';
+"false"              return 'false';
 "char"               return 'char';
 "String"             return 'string';
 "struct"             return 'struct';
@@ -62,14 +64,16 @@
 "length"             return 'length';
 "toUppercase"        return 'to_upper_case';
 "toLowercase"        return 'to_lower_case';
-/* LOGIC OPERATORS */
+/* RELATIONAL OPERATORS */
+"<="                 return 'less_than_or_equal';
+">="                 return 'greater_than_or_equal';
 "=="                 return 'equals';
 "!="                 return 'different';
 "<"                  return 'less_than';
-/* RELATIONAL OPERATORS */
 ">"                  return 'greater_than';
 "<="                 return 'less_than_or_equal';
 ">="                 return 'greater_than_or_equal';
+/* LOGIC OPERATORS */
 "&&"                 return 'and';
 "||"                 return 'or';
 "!"                  return 'not';
@@ -78,6 +82,8 @@
 "&"                  return 'concat';
 "^"                  return 'repeat';
 "$"                  return 'value';
+/*ASSIGN OPERATORS*/
+"="                  return 'assign';
 /* CONDITIONALS */
 "if"                 return 'if';
 "else"               return 'else';
@@ -107,10 +113,16 @@
 /lex
 
 /* OPERATORS PRECEDENCE AND ASSOCIATION */
-
+%right 'assign'
+%right 'ternary' 'colon'
+%left 'or'
+%left 'and'
+%left 'equals' 'different'
+%nonassoc 'greater_than' 'less_than' 'greater_than_or_equal' 'less_than_or_equal' 
 %left 'plus' 'minus'
 %left 'multiply' 'divide'
-%left uminus
+%right uminus unot
+%right 'open_par' 'close_par' 'open_bracket' 'close_bracket' 'open_brace' 'close_brace'
 
 %start START
 
@@ -121,47 +133,94 @@ START:
 ;
 
 INSTRUCTIONS
-	: INSTRUCTION INSTRUCTIONS
-	| INSTRUCTION
+	: INSTRUCTION INSTRUCTIONS {
+
+	} | INSTRUCTION {
+
+	}
 ;
 
 INSTRUCTION
-	: power open_bracket EXPRESSION close_bracket semicolon {
-		console.log('El valor de la expresión es: ' + $3);
-	}
-	| PRINT_INST
-	| STATEMENT_INST
-	| error semicolon {
+	: PRINT_INST semicolon {
+		$$ = $1;
+	} | error semicolon {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
 		Exception.exceptionList.push(e);
 	}
 ;
 
-PRINT_INST : PRINT2 open_par EXPRESSION close_par semicolon
+PRINT_INST
+	: PRINT open_bracket EXPRESSION close_bracket {
+		$$ = new Print(String($1), @1.first_line, (@1.first_column + 1), $3);
+	}
 ;
 
-PRINT2 : print
-	| print_ln
-;
-
-STATEMENT_INST : ATTRIBUTE equal_simple EXPRESSION semicolon
+PRINT
+	: print {$$ = String($1);}
+	| print_ln {$$ = String($1);}
 ;
 
 EXPRESSION
 	: minus EXPRESSION %prec uminus {
-		$$ = $2 *-1;
+		var n = new Node_(NodeName.ARITHMETIC, "-", @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		$$ = new Expression([n, $2]);
+	} | not EXPRESSION %prec unot {
+		var n = new Node_(NodeName.LOGIC, "!", @1.first_line, (@1.first_column + 1), NodeReturnType.Boolean);
+		$$ = new Expression([n, $2]);
+	} | EXPRESSION or EXPRESSION {
+		var n = new Node_(NodeName.LOGIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
+	} | EXPRESSION and EXPRESSION {
+		var n = new Node_(NodeName.LOGIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
+	} | EXPRESSION equals EXPRESSION {
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
+	} | EXPRESSION different EXPRESSION {
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
+	} | EXPRESSION less_than EXPRESSION {
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
+	} | EXPRESSION greater_than EXPRESSION {
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
+	} | EXPRESSION less_than_or_equal EXPRESSION {
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
+	} | EXPRESSION greater_than_or_equal EXPRESSION {
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION plus EXPRESSION {
-		$$ = $1 + $3;
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION minus EXPRESSION {
-		$$ = $1 - $3;
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION multiply EXPRESSION {
-		$$ = $1 * $3;
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION divide EXPRESSION {
-		$$ = $1 / $3;
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		$$ = new Expression([$1, n, $3]);
 	} | INTEGER {
-		$$ = Number($1);
+		var pd = new PrimitiveData(NodeName.INTEGER, Number($1), @1.first_line, (@1.first_column + 1), NodeReturnType.INTEGER);
+		$$ = new Expression([pd]);
 	} | DOUBLE {
-		$$ = new PrimitiveData(NodeName.DOUBLE, Number($1), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		var pd = new PrimitiveData(NodeName.DOUBLE, Number($1), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		$$ = new Expression([pd]);
+	} | true {
+		var pd = new PrimitiveData(NodeName.BOOLEAN, true, @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([pd]);
+	} | false {
+		var pd = new PrimitiveData(NodeName.BOOLEAN, false, @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		$$ = new Expression([pd]);
+	} | char {
+		var pd = new PrimitiveData(NodeName.CHAR, String($1), @1.first_line, (@1.first_column + 1), NodeReturnType.CHAR);
+		$$ = new Expression([pd]);
+	} | struct {
+		var s = new PrimitiveData(NodeName.STRUCT, Struct($1), @1.first_line, (@1.first_column + 1), NodeReturnType.STRUCT);
+		$$ = new Expression([s]);
 	} | open_par EXPRESSION close_par {
 		$$ = new Expression([$2]);
 	}

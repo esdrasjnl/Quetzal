@@ -1,6 +1,6 @@
 class NodeData{
     private functionType: number;
-    private returnType: number;
+    public returnType: number;
     private token: number;
     private variableType: number;
 
