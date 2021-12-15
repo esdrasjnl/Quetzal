@@ -76,6 +76,9 @@ NodeName.VOID = 70;
 NodeName.IN = 71;
 NodeName.EXPRESSION = 72;
 NodeName.PRIMITIVE_DATA = 73;
+NodeName.ARITHMETIC = 74;
+NodeName.LOGIC = 75;
+NodeName.RELATIONAL = 76;
 NodeName.nodeName = [
     "DOT",
     "COMMA",
@@ -149,5 +152,8 @@ NodeName.nodeName = [
     "VOID",
     "IN",
     "EXPRESSION",
-    "PRIMITIVE_DATA"
+    "PRIMITIVE_DATA",
+    "ARITHMETIC",
+    "LOGIC",
+    "RELATIONAL"
 ];
