@@ -11,6 +11,8 @@ config = {
     autoCloseBrackets: true
 };
 
+let root;
+
 editor = CodeMirror.fromTextArea(document.getElementById("entrada"), config);
 
 function run() {
@@ -18,7 +20,13 @@ function run() {
       Exception.exceptionList = [];
       console.log("Corriendo...!");
       document.getElementById("console").value = "";
-      result = grammar.parse(editor.getValue());
+      global = new Environment(null);
+      root = grammar.parse(editor.getValue());
+
+      root.children.forEach(child => {
+        child.run(global);
+      });
+
       console.log(result);
       Exception.print();
   } catch (error) {

@@ -128,15 +128,18 @@
 
 %% /* RULES DEFINITION */
 
-START: 
-	INSTRUCTIONS EOF
+START
+	: INSTRUCTIONS EOF {
+		return $1;
+	}
 ;
 
 INSTRUCTIONS
-	: INSTRUCTION INSTRUCTIONS {
-
+	: INSTRUCTIONS INSTRUCTION {
+		$$ = $1;
+		$$.children.push($2);
 	} | INSTRUCTION {
-
+		$$ = new Node_(NodeName.ROOT, "INSTRUCTIONS", -1, -1, [$1], new NodeData(-1, -1, -1, -1), false, false);
 	}
 ;
 
@@ -150,7 +153,7 @@ INSTRUCTION
 ;
 
 PRINT_INST
-	: PRINT open_bracket EXPRESSION close_bracket {
+	: PRINT open_par EXPRESSION close_par {
 		$$ = new Print(String($1), @1.first_line, (@1.first_column + 1), $3);
 	}
 ;

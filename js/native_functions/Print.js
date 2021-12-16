@@ -4,8 +4,8 @@ class Print extends Node_ {
         super(NodeName.PRINT, value, line, column, new Array(), new NodeData(-1, -1, -1, -1), false, false);
         this.message = message;
     }
-    run() {
-        document.getElementById("console").value = this.message.run() + (this.value == "println" ? "\n" : "");
+    run(env) {
+        document.getElementById("console").value = document.getElementById("console").value + this.message.run(env) + (this.value == "println" ? "\n" : "");
     }
     translate() {
         return "";

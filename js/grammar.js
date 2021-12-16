@@ -72,21 +72,32 @@
   }
 */
 var grammar = (function () {
-    var o = function (k, v, o, l) { for (o = o || {}, l = k.length; l--; o[k[l]] = v); return o }, $V0 = [1, 5], $V1 = [1, 7], $V2 = [1, 8], $V3 = [2, 5, 13, 14], $V4 = [1, 15], $V5 = [1, 16], $V6 = [1, 17], $V7 = [1, 18], $V8 = [1, 19], $V9 = [1, 20], $Va = [1, 21], $Vb = [1, 22], $Vc = [1, 23], $Vd = [1, 34], $Ve = [1, 25], $Vf = [1, 26], $Vg = [1, 27], $Vh = [1, 28], $Vi = [1, 29], $Vj = [1, 30], $Vk = [1, 31], $Vl = [1, 32], $Vm = [1, 33], $Vn = [1, 35], $Vo = [1, 36], $Vp = [12, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 35], $Vq = [12, 17, 18, 19, 20, 35], $Vr = [12, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 35];
+    var o = function (k, v, o, l) { for (o = o || {}, l = k.length; l--; o[k[l]] = v); return o }, $V0 = [1, 5], $V1 = [1, 7], $V2 = [1, 8], $V3 = [2, 5, 13, 14], $V4 = [1, 23], $V5 = [1, 15], $V6 = [1, 16], $V7 = [1, 17], $V8 = [1, 18], $V9 = [1, 19], $Va = [1, 20], $Vb = [1, 21], $Vc = [1, 22], $Vd = [1, 34], $Ve = [1, 25], $Vf = [1, 26], $Vg = [1, 27], $Vh = [1, 28], $Vi = [1, 29], $Vj = [1, 30], $Vk = [1, 31], $Vl = [1, 32], $Vm = [1, 33], $Vn = [1, 35], $Vo = [1, 36], $Vp = [12, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], $Vq = [12, 17, 18, 19, 20], $Vr = [12, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25];
     var parser = {
         trace: function trace() { },
         yy: {},
-        symbols_: { "error": 2, "START": 3, "INSTRUCTIONS": 4, "EOF": 5, "INSTRUCTION": 6, "PRINT_INST": 7, "semicolon": 8, "PRINT": 9, "open_bracket": 10, "EXPRESSION": 11, "close_bracket": 12, "print": 13, "print_ln": 14, "minus": 15, "not": 16, "or": 17, "and": 18, "equals": 19, "different": 20, "less_than": 21, "greater_than": 22, "less_than_or_equal": 23, "greater_than_or_equal": 24, "plus": 25, "multiply": 26, "divide": 27, "INTEGER": 28, "DOUBLE": 29, "true": 30, "false": 31, "char": 32, "struct": 33, "open_par": 34, "close_par": 35, "$accept": 0, "$end": 1 },
-        terminals_: { 2: "error", 5: "EOF", 8: "semicolon", 10: "open_bracket", 12: "close_bracket", 13: "print", 14: "print_ln", 15: "minus", 16: "not", 17: "or", 18: "and", 19: "equals", 20: "different", 21: "less_than", 22: "greater_than", 23: "less_than_or_equal", 24: "greater_than_or_equal", 25: "plus", 26: "multiply", 27: "divide", 28: "INTEGER", 29: "DOUBLE", 30: "true", 31: "false", 32: "char", 33: "struct", 34: "open_par", 35: "close_par" },
-        productions_: [0, [3, 2], [4, 2], [4, 1], [6, 2], [6, 2], [7, 4], [9, 1], [9, 1], [11, 2], [11, 2], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 1], [11, 1], [11, 1], [11, 1], [11, 1], [11, 1], [11, 3]],
+        symbols_: { "error": 2, "START": 3, "INSTRUCTIONS": 4, "EOF": 5, "INSTRUCTION": 6, "PRINT_INST": 7, "semicolon": 8, "PRINT": 9, "open_par": 10, "EXPRESSION": 11, "close_par": 12, "print": 13, "print_ln": 14, "minus": 15, "not": 16, "or": 17, "and": 18, "equals": 19, "different": 20, "less_than": 21, "greater_than": 22, "less_than_or_equal": 23, "greater_than_or_equal": 24, "plus": 25, "multiply": 26, "divide": 27, "INTEGER": 28, "DOUBLE": 29, "true": 30, "false": 31, "char": 32, "struct": 33, "ATTRIBUTE_LIST": 34, "comma": 35, "ATTRIBUTE": 36, "ATTRIBUTE_TYPE": 37, "IDENTIFIERT": 38, "int": 39, "double": 40, "boolean": 41, "string": 42, "$accept": 0, "$end": 1 },
+        terminals_: { 2: "error", 5: "EOF", 8: "semicolon", 10: "open_par", 12: "close_par", 13: "print", 14: "print_ln", 15: "minus", 16: "not", 17: "or", 18: "and", 19: "equals", 20: "different", 21: "less_than", 22: "greater_than", 23: "less_than_or_equal", 24: "greater_than_or_equal", 25: "plus", 26: "multiply", 27: "divide", 28: "INTEGER", 29: "DOUBLE", 30: "true", 31: "false", 32: "char", 33: "struct", 35: "comma", 38: "IDENTIFIERT", 39: "int", 40: "double", 41: "boolean", 42: "string" },
+        productions_: [0, [3, 2], [4, 2], [4, 1], [6, 2], [6, 2], [7, 4], [9, 1], [9, 1], [11, 2], [11, 2], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 1], [11, 1], [11, 1], [11, 1], [11, 1], [11, 1], [11, 3], [34, 3], [34, 1], [36, 2], [37, 1], [37, 1], [37, 1], [37, 1], [37, 1]],
         performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
             /* this == yyval */
 
             var $0 = $$.length - 1;
             switch (yystate) {
-                case 2: case 3:
+                case 1:
 
+                    return $$[$0 - 1];
 
+                    break;
+                case 2:
+
+                    this.$ = $$[$0 - 1];
+                    this.$.children.push($$[$0]);
+
+                    break;
+                case 3:
+
+                    this.$ = new Node_(NodeName.ROOT, "INSTRUCTIONS", -1, -1, [$$[$0]], new NodeData(-1, -1, -1, -1), false, false);
 
                     break;
                 case 4:
@@ -103,13 +114,10 @@ var grammar = (function () {
                 case 6:
 
                     this.$ = new Print(String($$[$0 - 3]), _$[$0 - 3].first_line, (_$[$0 - 3].first_column + 1), $$[$0 - 1]);
-                    this.$.run();
+
                     break;
-                case 7:
-                    this.$ = "print";
-                    break;
-                case 8:
-                    this.$ = "println";
+                case 7: case 8:
+                    this.$ = String($$[$0]);
                     break;
                 case 9:
 
@@ -182,10 +190,15 @@ var grammar = (function () {
                     this.$ = new Expression([$$[$0 - 1]]);
 
                     break;
+                case 30:
+
+                    //código para js
+
+                    break;
             }
         },
-        table: [{ 2: $V0, 3: 1, 4: 2, 6: 3, 7: 4, 9: 6, 13: $V1, 14: $V2 }, { 1: [3] }, { 5: [1, 9] }, { 2: $V0, 4: 10, 5: [2, 3], 6: 3, 7: 4, 9: 6, 13: $V1, 14: $V2 }, { 8: [1, 11] }, { 8: [1, 12] }, { 10: [1, 13] }, { 10: [2, 7] }, { 10: [2, 8] }, { 1: [2, 1] }, { 5: [2, 2] }, o($V3, [2, 4]), o($V3, [2, 5]), { 11: 14, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 12: [1, 24], 15: $Vd, 17: $Ve, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }, { 11: 37, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 38, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, o($Vp, [2, 23]), o($Vp, [2, 24]), o($Vp, [2, 25]), o($Vp, [2, 26]), o($Vp, [2, 27]), o($Vp, [2, 28]), { 11: 39, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 8: [2, 6] }, { 11: 40, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 41, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 42, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 43, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 44, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 45, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 46, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 47, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 48, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 49, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 50, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, { 11: 51, 15: $V4, 16: $V5, 28: $V6, 29: $V7, 30: $V8, 31: $V9, 32: $Va, 33: $Vb, 34: $Vc }, o($Vp, [2, 9]), o($Vp, [2, 10]), { 15: $Vd, 17: $Ve, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo, 35: [1, 52] }, o([12, 17, 35], [2, 11], { 15: $Vd, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o([12, 17, 18, 35], [2, 12], { 15: $Vd, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 13], { 15: $Vd, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 14], { 15: $Vd, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 15], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 16], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 17], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 18], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vr, [2, 19], { 26: $Vn, 27: $Vo }), o($Vr, [2, 20], { 26: $Vn, 27: $Vo }), o($Vp, [2, 21]), o($Vp, [2, 22]), o($Vp, [2, 29])],
-        defaultActions: { 7: [2, 7], 8: [2, 8], 9: [2, 1], 10: [2, 2], 24: [2, 6] },
+        table: [{ 2: $V0, 3: 1, 4: 2, 6: 3, 7: 4, 9: 6, 13: $V1, 14: $V2 }, { 1: [3] }, { 2: $V0, 5: [1, 9], 6: 10, 7: 4, 9: 6, 13: $V1, 14: $V2 }, o($V3, [2, 3]), { 8: [1, 11] }, { 8: [1, 12] }, { 10: [1, 13] }, { 10: [2, 7] }, { 10: [2, 8] }, { 1: [2, 1] }, o($V3, [2, 2]), o($V3, [2, 4]), o($V3, [2, 5]), { 10: $V4, 11: 14, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 12: [1, 24], 15: $Vd, 17: $Ve, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }, { 10: $V4, 11: 37, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 38, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, o($Vp, [2, 23]), o($Vp, [2, 24]), o($Vp, [2, 25]), o($Vp, [2, 26]), o($Vp, [2, 27]), o($Vp, [2, 28]), { 10: $V4, 11: 39, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 8: [2, 6] }, { 10: $V4, 11: 40, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 41, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 42, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 43, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 44, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 45, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 46, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 47, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 48, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 49, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 50, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 51, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, o($Vp, [2, 9]), o($Vp, [2, 10]), { 12: [1, 52], 15: $Vd, 17: $Ve, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }, o([12, 17], [2, 11], { 15: $Vd, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o([12, 17, 18], [2, 12], { 15: $Vd, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 13], { 15: $Vd, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 14], { 15: $Vd, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 15], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 16], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 17], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 18], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vr, [2, 19], { 26: $Vn, 27: $Vo }), o($Vr, [2, 20], { 26: $Vn, 27: $Vo }), o($Vp, [2, 21]), o($Vp, [2, 22]), o($Vp, [2, 29])],
+        defaultActions: { 7: [2, 7], 8: [2, 8], 9: [2, 1], 24: [2, 6] },
         parseError: function parseError(str, hash) {
             if (hash.recoverable) {
                 this.trace(str);
@@ -764,167 +777,175 @@ var grammar = (function () {
             performAction: function anonymous(yy, yy_, $avoiding_name_collisions, YY_START) {
                 var YYSTATE = YY_START;
                 switch ($avoiding_name_collisions) {
-                    case 0: return 'dot';
+                    case 0:// One line comment 
                         break;
-                    case 1: return 'comma';
+                    case 1:// Multi-Line comment
                         break;
-                    case 2: return 'colon';
+                    case 2: return 'dot';
                         break;
-                    case 3: return 8;
+                    case 3: return 35;
                         break;
-                    case 4: return 34;
+                    case 4: return 'colon';
                         break;
-                    case 5: return 35;
+                    case 5: return 8;
                         break;
                     case 6: return 10;
                         break;
                     case 7: return 12;
                         break;
-                    case 8: return 'open_brace';
+                    case 8: return 'open_bracket';
                         break;
-                    case 9: return 'close_brace';
+                    case 9: return 'close_bracket';
                         break;
-                    case 10: return 'copy';
+                    case 10: return 'open_brace';
                         break;
-                    case 11: return 25;
+                    case 11: return 'close_brace';
                         break;
-                    case 12: return 15;
+                    case 12: return 'copy';
                         break;
-                    case 13: return 26;
+                    case 13: return 'equal_simple';
                         break;
-                    case 14: return 27;
+                    case 14: return 25;
                         break;
-                    case 15: return 'percent';
+                    case 15: return 15;
                         break;
-                    case 16: return 'null';
+                    case 16: return 26;
                         break;
-                    case 17: return 'int';
+                    case 17: return 27;
                         break;
-                    case 18: return 'double';
+                    case 18: return 'percent';
                         break;
-                    case 19: return 'boolean';
+                    case 19: return 'null';
                         break;
-                    case 20: return 30;
+                    case 20: return 39;
                         break;
-                    case 21: return 31;
+                    case 21: return 40;
                         break;
-                    case 22: return 32;
+                    case 22: return 41;
                         break;
-                    case 23: return 'string';
+                    case 23: return 30;
                         break;
-                    case 24: return 33;
+                    case 24: return 31;
                         break;
-                    case 25: return 'void';
+                    case 25: return 32;
                         break;
-                    case 26: return 'power';
+                    case 26: return 42;
                         break;
-                    case 27: return 'sqrt_root';
+                    case 27: return 33;
                         break;
-                    case 28: return 'sine';
+                    case 28: return 'void';
                         break;
-                    case 29: return 'cosine';
+                    case 29: return 'power';
                         break;
-                    case 30: return 'tangent';
+                    case 30: return 'sqrt_root';
                         break;
-                    case 31: return 'logarithm';
+                    case 31: return 'sine';
                         break;
-                    case 32: return 'parse';
+                    case 32: return 'cosine';
                         break;
-                    case 33: return 'to_int';
+                    case 33: return 'tangent';
                         break;
-                    case 34: return 'to_double';
+                    case 34: return 'logarithm';
                         break;
-                    case 35: return 'to_string';
+                    case 35: return 'parse';
                         break;
-                    case 36: return 'type_of';
+                    case 36: return 'to_int';
                         break;
-                    case 37: return 13;
+                    case 37: return 'to_double';
                         break;
-                    case 38: return 14;
+                    case 38: return 'to_string';
                         break;
-                    case 39: return 'push';
+                    case 39: return 'type_of';
                         break;
-                    case 40: return 'pop';
+                    case 40: return 13;
                         break;
-                    case 41: return 'char_at';
+                    case 41: return 14;
                         break;
-                    case 42: return 'substring';
+                    case 42: return 'push';
                         break;
-                    case 43: return 'length';
+                    case 43: return 'pop';
                         break;
-                    case 44: return 'to_upper_case';
+                    case 44: return 'char_at';
                         break;
-                    case 45: return 'to_lower_case';
+                    case 45: return 'substring';
                         break;
-                    case 46: return 23;
+                    case 46: return 'length';
                         break;
-                    case 47: return 24;
+                    case 47: return 'to_upper_case';
                         break;
-                    case 48: return 19;
+                    case 48: return 'to_lower_case';
                         break;
-                    case 49: return 20;
+                    case 49: return 23;
                         break;
-                    case 50: return 21;
+                    case 50: return 24;
                         break;
-                    case 51: return 22;
+                    case 51: return 19;
                         break;
-                    case 52: return 23;
+                    case 52: return 20;
                         break;
-                    case 53: return 24;
+                    case 53: return 21;
                         break;
-                    case 54: return 18;
+                    case 54: return 22;
                         break;
-                    case 55: return 17;
+                    case 55: return 23;
                         break;
-                    case 56: return 16;
+                    case 56: return 24;
                         break;
-                    case 57: return 'ternary';
+                    case 57: return 18;
                         break;
-                    case 58: return 'concat';
+                    case 58: return 17;
                         break;
-                    case 59: return 'repeat';
+                    case 59: return 16;
                         break;
-                    case 60: return 'value';
+                    case 60: return 'ternary';
                         break;
-                    case 61: return 'assign';
+                    case 61: return 'concat';
                         break;
-                    case 62: return 'if';
+                    case 62: return 'repeat';
                         break;
-                    case 63: return 'else';
+                    case 63: return 'value';
                         break;
-                    case 64: return 'switch';
+                    case 64: return 'assign';
                         break;
-                    case 65: return 'case';
+                    case 65: return 'if';
                         break;
-                    case 66: return 'default';
+                    case 66: return 'else';
                         break;
-                    case 67: return 'while';
+                    case 67: return 'switch';
                         break;
-                    case 68: return 'do';
+                    case 68: return 'case';
                         break;
-                    case 69: return 'for';
+                    case 69: return 'default';
                         break;
-                    case 70: return 'in';
+                    case 70: return 'while';
                         break;
-                    case 71:
+                    case 71: return 'do';
                         break;
-                    case 72:
+                    case 72: return 'for';
                         break;
-                    case 73: return 29;
+                    case 73: return 'in';
                         break;
-                    case 74: return 28;
+                    case 74:
                         break;
-                    case 75: return 5;
+                    case 75:
                         break;
-                    case 76:
+                    case 76: return 29;
+                        break;
+                    case 77: return 28;
+                        break;
+                    case 78: return 38;
+                        break;
+                    case 79: return 5;
+                        break;
+                    case 80:
                         var e = new Exception(yy_.yytext, yy_.yylloc.first_line, (yy_.yylloc.first_column + 1), ExceptionType.LEXICAL);
                         Exception.exceptionList.push(e);
 
                         break;
                 }
             },
-            rules: [/^(?:\.)/, /^(?:,)/, /^(?::)/, /^(?:;)/, /^(?:\()/, /^(?:\))/, /^(?:\[)/, /^(?:\])/, /^(?:\{)/, /^(?:\})/, /^(?:#)/, /^(?:\+)/, /^(?:-)/, /^(?:\*)/, /^(?:\/)/, /^(?:%)/, /^(?:null\b)/, /^(?:int\b)/, /^(?:double\b)/, /^(?:boolean\b)/, /^(?:true\b)/, /^(?:false\b)/, /^(?:char\b)/, /^(?:String\b)/, /^(?:struct\b)/, /^(?:void\b)/, /^(?:pow\b)/, /^(?:sqrt\b)/, /^(?:sin\b)/, /^(?:cos\b)/, /^(?:tan\b)/, /^(?:log10\b)/, /^(?:parse\b)/, /^(?:toInt\b)/, /^(?:toDouble\b)/, /^(?:string\b)/, /^(?:typeof\b)/, /^(?:print\b)/, /^(?:println\b)/, /^(?:push\b)/, /^(?:pop\b)/, /^(?:characterOfPosition\b)/, /^(?:subString\b)/, /^(?:length\b)/, /^(?:toUppercase\b)/, /^(?:toLowercase\b)/, /^(?:<=)/, /^(?:>=)/, /^(?:==)/, /^(?:!=)/, /^(?:<)/, /^(?:>)/, /^(?:<=)/, /^(?:>=)/, /^(?:&&)/, /^(?:\|\|)/, /^(?:!)/, /^(?:\?)/, /^(?:&)/, /^(?:\^)/, /^(?:\$)/, /^(?:=)/, /^(?:if\b)/, /^(?:else\b)/, /^(?:switch\b)/, /^(?:case\b)/, /^(?:default\b)/, /^(?:while\b)/, /^(?:do\b)/, /^(?:for\b)/, /^(?:in\b)/, /^(?:[ \r\t]+)/, /^(?:\n)/, /^(?:[0-9]+(\.[0-9]+)?\b)/, /^(?:[0-9]+\b)/, /^(?:$)/, /^(?:.)/],
-            conditions: { "INITIAL": { "rules": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76], "inclusive": true } }
+            rules: [/^(?:\/\/.*)/, /^(?:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/])/, /^(?:\.)/, /^(?:,)/, /^(?::)/, /^(?:;)/, /^(?:\()/, /^(?:\))/, /^(?:\[)/, /^(?:\])/, /^(?:\{)/, /^(?:\})/, /^(?:#)/, /^(?:=)/, /^(?:\+)/, /^(?:-)/, /^(?:\*)/, /^(?:\/)/, /^(?:%)/, /^(?:null\b)/, /^(?:int\b)/, /^(?:double\b)/, /^(?:boolean\b)/, /^(?:true\b)/, /^(?:false\b)/, /^(?:char\b)/, /^(?:String\b)/, /^(?:struct\b)/, /^(?:void\b)/, /^(?:pow\b)/, /^(?:sqrt\b)/, /^(?:sin\b)/, /^(?:cos\b)/, /^(?:tan\b)/, /^(?:log10\b)/, /^(?:parse\b)/, /^(?:toInt\b)/, /^(?:toDouble\b)/, /^(?:string\b)/, /^(?:typeof\b)/, /^(?:print\b)/, /^(?:println\b)/, /^(?:push\b)/, /^(?:pop\b)/, /^(?:characterOfPosition\b)/, /^(?:subString\b)/, /^(?:length\b)/, /^(?:toUppercase\b)/, /^(?:toLowercase\b)/, /^(?:<=)/, /^(?:>=)/, /^(?:==)/, /^(?:!=)/, /^(?:<)/, /^(?:>)/, /^(?:<=)/, /^(?:>=)/, /^(?:&&)/, /^(?:\|\|)/, /^(?:!)/, /^(?:\?)/, /^(?:&)/, /^(?:\^)/, /^(?:\$)/, /^(?:=)/, /^(?:if\b)/, /^(?:else\b)/, /^(?:switch\b)/, /^(?:case\b)/, /^(?:default\b)/, /^(?:while\b)/, /^(?:do\b)/, /^(?:for\b)/, /^(?:in\b)/, /^(?:[ \r\t]+)/, /^(?:\n)/, /^(?:[0-9]+(\.[0-9]+)?\b)/, /^(?:[0-9]+\b)/, /^(?:(_[a-zA-Z])[a-zA-Z0-9_]*)/, /^(?:$)/, /^(?:.)/],
+            conditions: { "INITIAL": { "rules": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80], "inclusive": true } }
         });
         return lexer;
     })();
