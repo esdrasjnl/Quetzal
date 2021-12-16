@@ -6,7 +6,8 @@ class Exception extends Node_ {
     }
     static print() {
         this.exceptionList.forEach(exception => {
-            console.error(ExceptionType.type[exception.type] + " error: " + exception.value + " at line " + exception.line + " and column " + exception.column);
+            var message = ">>" + ExceptionType.type[exception.type] + " error: " + exception.value + " at line " + exception.line + " and column " + exception.column;
+            document.getElementById("console").value = document.getElementById("console").value + message + "\n";
         });
     }
     run() {

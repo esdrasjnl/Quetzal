@@ -23,12 +23,15 @@ function run() {
       global = new Environment(null);
       root = grammar.parse(editor.getValue());
 
-      root.children.forEach(child => {
-        child.run(global);
-      });
-
-      console.log(result);
       Exception.print();
+      
+      if (root.children.length > 0) {
+        root.children.forEach(child => {
+          if (child  != ';') {
+            child.run(global);
+          }
+        });
+      }      
   } catch (error) {
     
   }
