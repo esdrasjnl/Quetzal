@@ -79,6 +79,7 @@ NodeName.PRIMITIVE_DATA = 73;
 NodeName.ARITHMETIC = 74;
 NodeName.LOGIC = 75;
 NodeName.RELATIONAL = 76;
+NodeName.ROOT = 76;
 NodeName.nodeName = [
     "DOT",
     "COMMA",
@@ -155,5 +156,6 @@ NodeName.nodeName = [
     "PRIMITIVE_DATA",
     "ARITHMETIC",
     "LOGIC",
-    "RELATIONAL"
+    "RELATIONAL",
+    "ROOT"
 ];
