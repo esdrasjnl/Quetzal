@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>TytusX</title>
+    <title>Quetzal</title>
     
     <!-- VIZ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/viz.js" integrity="sha512-vnRdmX8ZxbU+IhA2gLhZqXkX1neJISG10xy0iP0WauuClu3AIMknxyDjYHEpEhi8fTZPyOCWgqUCnEafDB/jVQ==" crossorigin="anonymous"></script>
@@ -20,18 +20,18 @@
     <header>
         <section>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Quetzal</a>
+                <a class="navbar-brand" href="">Quetzal</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#">Reportes <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="#">Reports <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Arboles
+                        Trees
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" onclick="reporteAstAsc()">AST</a>
@@ -47,15 +47,15 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <h2>Entrada</h2>
+            <h2>In</h2>
                 <textarea id="entrada" name="code" class="CodeMirror"></textarea>
                 <br>
-                <button type="button" class="btn btn-dark" onclick="analizaQuetAsc()">Analizar Ascendente</button>
-                <button type="button" class="btn btn-dark" onclick="analizaQuetDesc()">Analizar Descendente</button>
+                <button type="button" class="btn btn-dark" onclick="run()">Run</button>
+                <button type="button" class="btn btn-dark" onclick="traslate()">Traslate</button>
         </div>
         <div class="col">
             <div class="content">
-                <h2>Salida</h2>
+                <h2>Out</h2>
                 <textarea class="form-control" id="result" wrap='off' rows="11" readonly></textarea>
                 
             </div>
@@ -65,10 +65,10 @@
 
     <section>
         <div class="container">
-            <h2>Consola</h2>
+            <h2>Console</h2>
             <textarea class="form-control" id="console" readonly></textarea>
             <div id="clickedTab">
-                <h3>Reporte Ast</h3>
+                <h3>AST Report</h3>
             </div>
         </div>
         
@@ -97,6 +97,13 @@
 
     <script type="text/javascript" src="js/expression/Expression.js"></script>
     <script type="text/javascript" src="js/expression/PrimitiveData.js"></script>
+    <script type="text/javascript" src="js/expression/Arithmetic.js"></script>
+    <script type="text/javascript" src="js/expression/Logic.js"></script>
+    <script type="text/javascript" src="js/expression/Relational.js"></script>
+    
+    <script type="text/javascript" src="js/native_functions/Print.js"></script>
+    
+    <script type="text/javascript" src="js/execution/Environment.js"></script>
 
     <script type="text/javascript" src="js/grammar.js"></script>
 </body>

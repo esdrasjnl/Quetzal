@@ -11,33 +11,33 @@ config = {
     autoCloseBrackets: true
 };
 
+let root;
+
 editor = CodeMirror.fromTextArea(document.getElementById("entrada"), config);
 
-function analizaQuetAsc() {
-    try {
-        Exception.exceptionList = [];
-        console.log("Ascendente");
-        document.getElementById("console").value = "";
-        result = grammar.parse(editor.getValue());
-        console.log(result);
-        Exception.print();
-    } catch (error) {
-      
-    }
-}
-
-function analizaXMLDesc() {
+function run() {
   try {
-      console.log("Descendente");
+      Exception.exceptionList = [];
+      console.log("Corriendo...!");
       document.getElementById("console").value = "";
-      result = XmlDesc.parse(editor.getValue());
-      console.log(result);
+      global = new Environment(null);
+      root = grammar.parse(editor.getValue());
+
+      Exception.print();
+      
+      if (root.children.length > 0) {
+        root.children.forEach(child => {
+          if (child  != ';') {
+            child.run(global);
+          }
+        });
+      }      
   } catch (error) {
     
   }
 }
 
-function reporteAstAsc(){
+function reporteAst(){
     let arbol = new AST();
     let graficar = arbol.generarDot(result);
     var clickedTab = document.getElementById("clickedTab");
@@ -52,23 +52,5 @@ function reporteAstAsc(){
     .catch((error) => {
       console.error(error);
     });
-
-}
-
-function reporteAstDesc(){
-  let arbol = new AST();
-  let graficar = arbol.generarDot(result);
-  var clickedTab = document.getElementById("clickedTab");
-  clickedTab.innerHTML = "";
-  clickedTab.innerHTML = "<h3>Reporte AST</h3>"
-
-  //console.log(graficar);
-  var viz = new Viz();
-  viz.renderSVGElement(graficar).then(function (element) {
-    clickedTab.appendChild(element);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
 
 }

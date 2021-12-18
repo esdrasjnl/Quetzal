@@ -72,6 +72,10 @@ class NodeName{
     public static readonly IN = 71;
     public static readonly EXPRESSION = 72;
     public static readonly PRIMITIVE_DATA = 73;
+    public static readonly ARITHMETIC = 74;
+    public static readonly LOGIC = 75;
+    public static readonly RELATIONAL = 76;
+    public static readonly ROOT = 76;
 
     public static readonly nodeName = [
         "DOT",
@@ -146,7 +150,11 @@ class NodeName{
         "VOID",
         "IN",
         "EXPRESSION",
-        "PRIMITIVE_DATA"
+        "PRIMITIVE_DATA",
+        "ARITHMETIC",
+        "LOGIC",
+        "RELATIONAL",
+        "ROOT"
     ];
 
     constructor(){

@@ -19,6 +19,6 @@ abstract class Node_{
         this.isVariable = isVariable;
     }
 
-    abstract run(): any;
+    abstract run(env: Environment): any;
     abstract translate(): string;
 }
