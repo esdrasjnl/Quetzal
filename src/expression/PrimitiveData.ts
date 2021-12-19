@@ -4,7 +4,7 @@ class PrimitiveData extends Node_{
     }
 
     run() {
-        
+        return this.value;
     }
 
     translate(): string {

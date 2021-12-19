@@ -5,7 +5,7 @@
   "main": "events.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "jison": "jison ./jison/grammar.jison && move grammar.js ./js/"
+    "jison": "jison ./jison/grammar.jison && mv grammar.js ./js/"
   },
   "repository": {
     "type": "git",
