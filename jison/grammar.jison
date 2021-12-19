@@ -131,7 +131,7 @@
 START
 	: INSTRUCTIONS EOF {
 		return $1;
-	}
+	} 
 ;
 
 INSTRUCTIONS
@@ -140,6 +140,9 @@ INSTRUCTIONS
 		$$.children.push($2);
 	} | INSTRUCTION {
 		$$ = new Node_(NodeName.INSTRUCTIONS, "INSTRUCTIONS", -1, -1, [$1], new NodeData(-1, -1, -1, -1), false, false);
+	} | error semicolon {
+		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
+		Exception.exceptionList.push(e);
 	}
 ;
 
@@ -156,10 +159,12 @@ INSTRUCTION
 		$$ = $1;
 	} | IF_SENTENCE {
 		$$ = $1;
+	} | WHILE_SENTENCE {
+
 	} | error SCAPE {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
 		Exception.exceptionList.push(e);
-	}
+	} 
 ;
 
 PRINT_INST
@@ -203,6 +208,12 @@ ELSE_IF_ELSE
 INSTRUCTIONS_BLOCK
 	: open_brace INSTRUCTIONS close_brace {
 		$$ = $2
+	}
+;
+
+WHILE_SENTENCE
+	: while open_par EXPRESSION close_par INSTRUCTIONS_BLOCK {
+
 	}
 ;
 
