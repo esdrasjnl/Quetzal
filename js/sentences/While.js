@@ -7,14 +7,11 @@ class While extends Node_ {
     run(env) {
         this.environment.previous = env;
         var condition = this.children[0];
-        /*
-        if (condition.run(this.environment)) {
+        while (condition.run(env)) {
             this.children[1].children.forEach(child => {
-                child.run(this.environment);
+                child.run(env);
             });
-        } else {
-            this.children[2].run(env);
-        }*/
+        }
     }
     translate() {
         return "";
