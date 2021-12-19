@@ -14,7 +14,7 @@ class Node_ {
         return this.value;
     }
     getName() {
-        return NodeName.nodeName[this.name];
+        return NodeName.nodeName[this.name - 1];
     }
     getChildren() {
         return this.children;
