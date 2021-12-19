@@ -10,4 +10,13 @@ class Node_ {
         this.isFunction = isFunction;
         this.isVariable = isVariable;
     }
+    getValue() {
+        return this.value;
+    }
+    getName() {
+        return NodeName.nodeName[this.name];
+    }
+    getChildren() {
+        return this.children;
+    }
 }
