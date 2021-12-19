@@ -80,6 +80,7 @@ NodeName.ARITHMETIC = 74;
 NodeName.LOGIC = 75;
 NodeName.RELATIONAL = 76;
 NodeName.ROOT = 76;
+NodeName.INSTRUCTIONS = 77;
 NodeName.nodeName = [
     "DOT",
     "COMMA",
@@ -157,5 +158,6 @@ NodeName.nodeName = [
     "ARITHMETIC",
     "LOGIC",
     "RELATIONAL",
-    "ROOT"
+    "ROOT",
+    "INSTRUCTIONS"
 ];

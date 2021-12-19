@@ -1,5 +1,5 @@
 class Environment {
-    private previous: Environment | null;
+    public previous: Environment | null;
     private symbolsTable: Map<string, Node_>;
 
     constructor(previous: Environment | null){
