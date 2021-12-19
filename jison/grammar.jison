@@ -140,9 +140,6 @@ INSTRUCTIONS
 		$$.children.push($2);
 	} | INSTRUCTION {
 		$$ = new Node_(NodeName.INSTRUCTIONS, "INSTRUCTIONS", -1, -1, [$1], new NodeData(-1, -1, -1, -1), false, false);
-	} | error semicolon {
-		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
-		Exception.exceptionList.push(e);
 	}
 ;
 
@@ -152,7 +149,18 @@ INSTRUCTION
 	} | IF_SENTENCE {
 		$$ = $1;
 	} | WHILE_SENTENCE {
+		$$ = $1;
+	} | error SCAPE {
+		var e = new Exception($2, @2.first_line, (@2.first_column + 1), ExceptionType.SYNTACTIC);
+		Exception.exceptionList.push(e);
+	} 
+;
 
+SCAPE
+	: semicolon {
+		$$ = $1;
+	} | close_brace {
+		$$ = $1;
 	}
 ;
 
@@ -202,7 +210,7 @@ INSTRUCTIONS_BLOCK
 
 WHILE_SENTENCE
 	: while open_par EXPRESSION close_par INSTRUCTIONS_BLOCK {
-
+		$$ = new While(NodeName.WHILE, String($1), @1.first_line, (@1.first_column + 1), [$3, $5]);
 	}
 ;
 
