@@ -27,7 +27,7 @@ abstract class Node_{
     }
 
     public getName():string{
-        return NodeName.nodeName[this.name];
+        return NodeName.nodeName[this.name - 1];
     }
 
     public getChildren(){
