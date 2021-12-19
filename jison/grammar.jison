@@ -143,12 +143,20 @@ INSTRUCTIONS
 	}
 ;
 
+SCAPE
+	: semicolon {
+		$$ = $1;
+	} | close_brace {
+		$$ = $1;
+	}
+;
+
 INSTRUCTION
 	: PRINT_INST semicolon {
 		$$ = $1;
 	} | IF_SENTENCE {
 		$$ = $1;
-	} | error semicolon {
+	} | error SCAPE {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
 		Exception.exceptionList.push(e);
 	}

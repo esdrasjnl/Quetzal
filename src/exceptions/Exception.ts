@@ -9,7 +9,9 @@ class Exception extends Node_ {
 
     private static print(){
         this.exceptionList.forEach(exception => {
-            console.error(ExceptionType.type[exception.type] + " error: " + exception.value + " at line " + exception.line + " and column " + exception.column);
+            console.error();
+            var console_txt = document.getElementById("console").value + ExceptionType.type[exception.type] + " error: " + exception.value + " at line " + exception.line + " and column " + exception.column + "\n";
+            document.getElementById("console").value = console_txt;
         });
     }
 
