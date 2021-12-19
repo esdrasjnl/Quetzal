@@ -21,4 +21,17 @@ abstract class Node_{
 
     abstract run(env: Environment | null): any;
     abstract translate(): string;
+    
+    public getValue():any{
+        return this.value;
+    }
+
+    public getName():string{
+        return NodeName.nodeName[this.name];
+    }
+
+    public getChildren(){
+        return this.children;
+    }
+
 }
