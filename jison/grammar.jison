@@ -158,7 +158,10 @@ INSTRUCTION
 		$$ = $1;
 	} | WHILE_SENTENCE {
 		$$ = $1;
-	}
+	} | error SCAPE {
+		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
+		Exception.exceptionList.push(e);
+	} 
 ;
 
 SCAPE
@@ -166,10 +169,7 @@ SCAPE
 		$$ = $1;
 	} | close_brace {
 		$$ = $1;
-	} | error SCAPE {
-		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
-		Exception.exceptionList.push(e);
-	} 
+	}
 ;
 
 PRINT_INST
