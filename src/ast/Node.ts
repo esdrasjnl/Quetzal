@@ -19,6 +19,19 @@ abstract class Node_{
         this.isVariable = isVariable;
     }
 
-    abstract run(env: Environment): any;
+    abstract run(env: Environment | null): any;
     abstract translate(): string;
+    
+    public getValue():any{
+        return this.value;
+    }
+
+    public getName():string{
+        return NodeName.nodeName[this.name];
+    }
+
+    public getChildren(){
+        return this.children;
+    }
+
 }

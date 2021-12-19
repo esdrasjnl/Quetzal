@@ -139,12 +139,14 @@ INSTRUCTIONS
 		$$ = $1;
 		$$.children.push($2);
 	} | INSTRUCTION {
-		$$ = new Node_(NodeName.ROOT, "INSTRUCTIONS", -1, -1, [$1], new NodeData(-1, -1, -1, -1), false, false);
+		$$ = new Node_(NodeName.INSTRUCTIONS, "INSTRUCTIONS", -1, -1, [$1], new NodeData(-1, -1, -1, -1), false, false);
 	}
 ;
 
 INSTRUCTION
 	: PRINT_INST semicolon {
+		$$ = $1;
+	} | IF_SENTENCE {
 		$$ = $1;
 	} | error semicolon {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
@@ -161,6 +163,39 @@ PRINT_INST
 PRINT
 	: print {$$ = String($1);}
 	| print_ln {$$ = String($1);}
+;
+
+IF_SENTENCE
+	: if open_par EXPRESSION close_par INSTRUCTIONS_BLOCK MORE_IF_OPTIONS {
+		$$ = new If(NodeName.IF, String($1), @1.first_line, (@1.first_column + 1), [$3, $5, $6]);
+	}
+;
+
+MORE_IF_OPTIONS
+	: else ELSE_IF_ELSE {
+		$2.line = @1.first_line;
+		$2.column = (@1.first_column + 1);
+
+		$$ = $2;
+	} | %empty {
+		/*IF*/
+	}
+;
+
+ELSE_IF_ELSE
+	: INSTRUCTIONS_BLOCK {
+		/*ELSE*/
+		$$ = new Else([$1]);
+	} | IF_SENTENCE {
+		/*IF-ELSE-IF*/
+		$$ = $1;
+	}
+;
+
+INSTRUCTIONS_BLOCK
+	: open_brace INSTRUCTIONS close_brace {
+		$$ = $2
+	}
 ;
 
 EXPRESSION

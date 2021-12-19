@@ -71,906 +71,939 @@
     recoverable: (boolean: TRUE when the parser has a error recovery rule available for this particular error)
   }
 */
-var grammar = (function () {
-    var o = function (k, v, o, l) { for (o = o || {}, l = k.length; l--; o[k[l]] = v); return o }, $V0 = [1, 5], $V1 = [1, 7], $V2 = [1, 8], $V3 = [2, 5, 13, 14], $V4 = [1, 23], $V5 = [1, 15], $V6 = [1, 16], $V7 = [1, 17], $V8 = [1, 18], $V9 = [1, 19], $Va = [1, 20], $Vb = [1, 21], $Vc = [1, 22], $Vd = [1, 34], $Ve = [1, 25], $Vf = [1, 26], $Vg = [1, 27], $Vh = [1, 28], $Vi = [1, 29], $Vj = [1, 30], $Vk = [1, 31], $Vl = [1, 32], $Vm = [1, 33], $Vn = [1, 35], $Vo = [1, 36], $Vp = [12, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], $Vq = [12, 17, 18, 19, 20], $Vr = [12, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-    var parser = {
-        trace: function trace() { },
-        yy: {},
-        symbols_: { "error": 2, "START": 3, "INSTRUCTIONS": 4, "EOF": 5, "INSTRUCTION": 6, "PRINT_INST": 7, "semicolon": 8, "PRINT": 9, "open_par": 10, "EXPRESSION": 11, "close_par": 12, "print": 13, "print_ln": 14, "minus": 15, "not": 16, "or": 17, "and": 18, "equals": 19, "different": 20, "less_than": 21, "greater_than": 22, "less_than_or_equal": 23, "greater_than_or_equal": 24, "plus": 25, "multiply": 26, "divide": 27, "INTEGER": 28, "DOUBLE": 29, "true": 30, "false": 31, "char": 32, "struct": 33, "ATTRIBUTE_LIST": 34, "comma": 35, "ATTRIBUTE": 36, "ATTRIBUTE_TYPE": 37, "IDENTIFIERT": 38, "int": 39, "double": 40, "boolean": 41, "string": 42, "$accept": 0, "$end": 1 },
-        terminals_: { 2: "error", 5: "EOF", 8: "semicolon", 10: "open_par", 12: "close_par", 13: "print", 14: "print_ln", 15: "minus", 16: "not", 17: "or", 18: "and", 19: "equals", 20: "different", 21: "less_than", 22: "greater_than", 23: "less_than_or_equal", 24: "greater_than_or_equal", 25: "plus", 26: "multiply", 27: "divide", 28: "INTEGER", 29: "DOUBLE", 30: "true", 31: "false", 32: "char", 33: "struct", 35: "comma", 38: "IDENTIFIERT", 39: "int", 40: "double", 41: "boolean", 42: "string" },
-        productions_: [0, [3, 2], [4, 2], [4, 1], [6, 2], [6, 2], [7, 4], [9, 1], [9, 1], [11, 2], [11, 2], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 3], [11, 1], [11, 1], [11, 1], [11, 1], [11, 1], [11, 1], [11, 3], [34, 3], [34, 1], [36, 2], [37, 1], [37, 1], [37, 1], [37, 1], [37, 1]],
-        performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
-            /* this == yyval */
-
-            var $0 = $$.length - 1;
-            switch (yystate) {
-                case 1:
-
-                    return $$[$0 - 1];
-
-                    break;
-                case 2:
-
-                    this.$ = $$[$0 - 1];
-                    this.$.children.push($$[$0]);
-
-                    break;
-                case 3:
-
-                    this.$ = new Node_(NodeName.ROOT, "INSTRUCTIONS", -1, -1, [$$[$0]], new NodeData(-1, -1, -1, -1), false, false);
-
-                    break;
-                case 4:
-
-                    this.$ = $$[$0 - 1];
-
-                    break;
-                case 5:
-
-                    var e = new Exception($$[$0 - 1], _$[$0 - 1].first_line, (_$[$0 - 1].first_column + 1), ExceptionType.SYNTACTIC);
-                    Exception.exceptionList.push(e);
-
-                    break;
-                case 6:
-
-                    this.$ = new Print(String($$[$0 - 3]), _$[$0 - 3].first_line, (_$[$0 - 3].first_column + 1), $$[$0 - 1]);
-
-                    break;
-                case 7: case 8:
-                    this.$ = String($$[$0]);
-                    break;
-                case 9:
-
-                    var n = new Node_(NodeName.ARITHMETIC, "-", _$[$0 - 1].first_line, (_$[$0 - 1].first_column + 1), NodeReturnType.DOUBLE);
-                    this.$ = new Expression([n, $$[$0]]);
-
-                    break;
-                case 10:
-
-                    var n = new Node_(NodeName.LOGIC, "!", _$[$0 - 1].first_line, (_$[$0 - 1].first_column + 1), NodeReturnType.Boolean);
-                    this.$ = new Expression([n, $$[$0]]);
-
-                    break;
-                case 11: case 12:
-
-                    var n = new Node_(NodeName.LOGIC, String($$[$0 - 1]), _$[$0 - 2].first_line, (_$[$0 - 2].first_column + 1), NodeReturnType.BOOLEAN);
-                    this.$ = new Expression([$$[$0 - 2], n, $$[$0]]);
-
-                    break;
-                case 13: case 14: case 15: case 16: case 17: case 18:
-
-                    var n = new Node_(NodeName.RELATIONAL, String($$[$0 - 1]), _$[$0 - 2].first_line, (_$[$0 - 2].first_column + 1), NodeReturnType.BOOLEAN);
-                    this.$ = new Expression([$$[$0 - 2], n, $$[$0]]);
-
-                    break;
-                case 19: case 20: case 21: case 22:
-
-                    var n = new Node_(NodeName.ARITHMETIC, String($$[$0 - 1]), _$[$0 - 2].first_line, (_$[$0 - 2].first_column + 1), NodeReturnType.DOUBLE);
-                    this.$ = new Expression([$$[$0 - 2], n, $$[$0]]);
-
-                    break;
-                case 23:
-
-                    var pd = new PrimitiveData(NodeName.INTEGER, Number($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.INTEGER);
-                    this.$ = new Expression([pd]);
-
-                    break;
-                case 24:
-
-                    var pd = new PrimitiveData(NodeName.DOUBLE, Number($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.DOUBLE);
-                    this.$ = new Expression([pd]);
-
-                    break;
-                case 25:
-
-                    var pd = new PrimitiveData(NodeName.BOOLEAN, true, _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.BOOLEAN);
-                    this.$ = new Expression([pd]);
-
-                    break;
-                case 26:
-
-                    var pd = new PrimitiveData(NodeName.BOOLEAN, false, _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.BOOLEAN);
-                    this.$ = new Expression([pd]);
-
-                    break;
-                case 27:
-
-                    var pd = new PrimitiveData(NodeName.CHAR, String($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.CHAR);
-                    this.$ = new Expression([pd]);
-
-                    break;
-                case 28:
-
-                    var s = new PrimitiveData(NodeName.STRUCT, Struct($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.STRUCT);
-                    this.$ = new Expression([s]);
-
-                    break;
-                case 29:
-
-                    this.$ = new Expression([$$[$0 - 1]]);
-
-                    break;
-                case 30:
-
-                    //código para js
-
-                    break;
-            }
-        },
-        table: [{ 2: $V0, 3: 1, 4: 2, 6: 3, 7: 4, 9: 6, 13: $V1, 14: $V2 }, { 1: [3] }, { 2: $V0, 5: [1, 9], 6: 10, 7: 4, 9: 6, 13: $V1, 14: $V2 }, o($V3, [2, 3]), { 8: [1, 11] }, { 8: [1, 12] }, { 10: [1, 13] }, { 10: [2, 7] }, { 10: [2, 8] }, { 1: [2, 1] }, o($V3, [2, 2]), o($V3, [2, 4]), o($V3, [2, 5]), { 10: $V4, 11: 14, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 12: [1, 24], 15: $Vd, 17: $Ve, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }, { 10: $V4, 11: 37, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 38, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, o($Vp, [2, 23]), o($Vp, [2, 24]), o($Vp, [2, 25]), o($Vp, [2, 26]), o($Vp, [2, 27]), o($Vp, [2, 28]), { 10: $V4, 11: 39, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 8: [2, 6] }, { 10: $V4, 11: 40, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 41, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 42, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 43, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 44, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 45, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 46, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 47, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 48, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 49, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 50, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, { 10: $V4, 11: 51, 15: $V5, 16: $V6, 28: $V7, 29: $V8, 30: $V9, 31: $Va, 32: $Vb, 33: $Vc }, o($Vp, [2, 9]), o($Vp, [2, 10]), { 12: [1, 52], 15: $Vd, 17: $Ve, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }, o([12, 17], [2, 11], { 15: $Vd, 18: $Vf, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o([12, 17, 18], [2, 12], { 15: $Vd, 19: $Vg, 20: $Vh, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 13], { 15: $Vd, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 14], { 15: $Vd, 21: $Vi, 22: $Vj, 23: $Vk, 24: $Vl, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 15], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 16], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 17], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vq, [2, 18], { 15: $Vd, 25: $Vm, 26: $Vn, 27: $Vo }), o($Vr, [2, 19], { 26: $Vn, 27: $Vo }), o($Vr, [2, 20], { 26: $Vn, 27: $Vo }), o($Vp, [2, 21]), o($Vp, [2, 22]), o($Vp, [2, 29])],
-        defaultActions: { 7: [2, 7], 8: [2, 8], 9: [2, 1], 24: [2, 6] },
-        parseError: function parseError(str, hash) {
-            if (hash.recoverable) {
-                this.trace(str);
-            } else {
-                var error = new Error(str);
-                error.hash = hash;
-                throw error;
-            }
-        },
-        parse: function parse(input) {
-            var self = this,
-                stack = [0],
-                tstack = [], // token stack
-                vstack = [null], // semantic value stack
-                lstack = [], // location stack
-                table = this.table,
-                yytext = '',
-                yylineno = 0,
-                yyleng = 0,
-                recovering = 0,
-                TERROR = 2,
-                EOF = 1;
-
-            var args = lstack.slice.call(arguments, 1);
-
-            //this.reductionCount = this.shiftCount = 0;
-
-            var lexer = Object.create(this.lexer);
-            var sharedState = { yy: {} };
-            // copy state
-            for (var k in this.yy) {
-                if (Object.prototype.hasOwnProperty.call(this.yy, k)) {
-                    sharedState.yy[k] = this.yy[k];
-                }
-            }
-
-            lexer.setInput(input, sharedState.yy);
-            sharedState.yy.lexer = lexer;
-            sharedState.yy.parser = this;
-            if (typeof lexer.yylloc == 'undefined') {
-                lexer.yylloc = {};
-            }
-            var yyloc = lexer.yylloc;
-            lstack.push(yyloc);
-
-            var ranges = lexer.options && lexer.options.ranges;
-
-            if (typeof sharedState.yy.parseError === 'function') {
-                this.parseError = sharedState.yy.parseError;
-            } else {
-                this.parseError = Object.getPrototypeOf(this).parseError;
-            }
-
-            function popStack(n) {
-                stack.length = stack.length - 2 * n;
-                vstack.length = vstack.length - n;
-                lstack.length = lstack.length - n;
-            }
-
-            _token_stack:
-            var lex = function () {
-                var token;
-                token = lexer.lex() || EOF;
-                // if token isn't its numeric value, convert
-                if (typeof token !== 'number') {
-                    token = self.symbols_[token] || token;
-                }
-                return token;
-            }
-
-            var symbol, preErrorSymbol, state, action, a, r, yyval = {}, p, len, newState, expected;
-            while (true) {
-                // retreive state number from top of stack
-                state = stack[stack.length - 1];
-
-                // use default actions if available
-                if (this.defaultActions[state]) {
-                    action = this.defaultActions[state];
-                } else {
-                    if (symbol === null || typeof symbol == 'undefined') {
-                        symbol = lex();
-                    }
-                    // read action for current state and first input
-                    action = table[state] && table[state][symbol];
-                }
-
-                _handle_error:
-                // handle parse error
-                if (typeof action === 'undefined' || !action.length || !action[0]) {
-                    var error_rule_depth;
-                    var errStr = '';
-
-                    // Return the rule stack depth where the nearest error rule can be found.
-                    // Return FALSE when no error recovery rule was found.
-                    function locateNearestErrorRecoveryRule(state) {
-                        var stack_probe = stack.length - 1;
-                        var depth = 0;
-
-                        // try to recover from error
-                        for (; ;) {
-                            // check for error recovery rule in this state
-                            if ((TERROR.toString()) in table[state]) {
-                                return depth;
-                            }
-                            if (state === 0 || stack_probe < 2) {
-                                return false; // No suitable error recovery rule available.
-                            }
-                            stack_probe -= 2; // popStack(1): [symbol, action]
-                            state = stack[stack_probe];
-                            ++depth;
-                        }
-                    }
-
-                    if (!recovering) {
-                        // first see if there's any chance at hitting an error recovery rule:
-                        error_rule_depth = locateNearestErrorRecoveryRule(state);
-
-                        // Report error
-                        expected = [];
-                        for (p in table[state]) {
-                            if (this.terminals_[p] && p > TERROR) {
-                                expected.push("'" + this.terminals_[p] + "'");
-                            }
-                        }
-                        if (lexer.showPosition) {
-                            errStr = 'Parse error on line ' + (yylineno + 1) + ":\n" + lexer.showPosition() + "\nExpecting " + expected.join(', ') + ", got '" + (this.terminals_[symbol] || symbol) + "'";
-                        } else {
-                            errStr = 'Parse error on line ' + (yylineno + 1) + ": Unexpected " +
-                                (symbol == EOF ? "end of input" :
-                                    ("'" + (this.terminals_[symbol] || symbol) + "'"));
-                        }
-                        this.parseError(errStr, {
-                            text: lexer.match,
-                            token: this.terminals_[symbol] || symbol,
-                            line: lexer.yylineno,
-                            loc: yyloc,
-                            expected: expected,
-                            recoverable: (error_rule_depth !== false)
-                        });
-                    } else if (preErrorSymbol !== EOF) {
-                        error_rule_depth = locateNearestErrorRecoveryRule(state);
-                    }
-
-                    // just recovered from another error
-                    if (recovering == 3) {
-                        if (symbol === EOF || preErrorSymbol === EOF) {
-                            throw new Error(errStr || 'Parsing halted while starting to recover from another error.');
-                        }
-
-                        // discard current lookahead and grab another
-                        yyleng = lexer.yyleng;
-                        yytext = lexer.yytext;
-                        yylineno = lexer.yylineno;
-                        yyloc = lexer.yylloc;
-                        symbol = lex();
-                    }
-
-                    // try to recover from error
-                    if (error_rule_depth === false) {
-                        throw new Error(errStr || 'Parsing halted. No suitable error recovery rule available.');
-                    }
-                    popStack(error_rule_depth);
-
-                    preErrorSymbol = (symbol == TERROR ? null : symbol); // save the lookahead token
-                    symbol = TERROR;         // insert generic error symbol as new lookahead
-                    state = stack[stack.length - 1];
-                    action = table[state] && table[state][TERROR];
-                    recovering = 3; // allow 3 real symbols to be shifted before reporting a new error
-                }
-
-                // this shouldn't happen, unless resolve defaults are off
-                if (action[0] instanceof Array && action.length > 1) {
-                    throw new Error('Parse Error: multiple actions possible at state: ' + state + ', token: ' + symbol);
-                }
-
-                switch (action[0]) {
-                    case 1: // shift
-                        //this.shiftCount++;
-
-                        stack.push(symbol);
-                        vstack.push(lexer.yytext);
-                        lstack.push(lexer.yylloc);
-                        stack.push(action[1]); // push state
-                        symbol = null;
-                        if (!preErrorSymbol) { // normal execution/no error
-                            yyleng = lexer.yyleng;
-                            yytext = lexer.yytext;
-                            yylineno = lexer.yylineno;
-                            yyloc = lexer.yylloc;
-                            if (recovering > 0) {
-                                recovering--;
-                            }
-                        } else {
-                            // error just occurred, resume old lookahead f/ before error
-                            symbol = preErrorSymbol;
-                            preErrorSymbol = null;
-                        }
-                        break;
-
-                    case 2:
-                        // reduce
-                        //this.reductionCount++;
-
-                        len = this.productions_[action[1]][1];
-
-                        // perform semantic action
-                        yyval.$ = vstack[vstack.length - len]; // default to $$ = $1
-                        // default location, uses first token for firsts, last for lasts
-                        yyval._$ = {
-                            first_line: lstack[lstack.length - (len || 1)].first_line,
-                            last_line: lstack[lstack.length - 1].last_line,
-                            first_column: lstack[lstack.length - (len || 1)].first_column,
-                            last_column: lstack[lstack.length - 1].last_column
-                        };
-                        if (ranges) {
-                            yyval._$.range = [lstack[lstack.length - (len || 1)].range[0], lstack[lstack.length - 1].range[1]];
-                        }
-                        r = this.performAction.apply(yyval, [yytext, yyleng, yylineno, sharedState.yy, action[1], vstack, lstack].concat(args));
-
-                        if (typeof r !== 'undefined') {
-                            return r;
-                        }
-
-                        // pop off stack
-                        if (len) {
-                            stack = stack.slice(0, -1 * len * 2);
-                            vstack = vstack.slice(0, -1 * len);
-                            lstack = lstack.slice(0, -1 * len);
-                        }
-
-                        stack.push(this.productions_[action[1]][0]);    // push nonterminal (reduce)
-                        vstack.push(yyval.$);
-                        lstack.push(yyval._$);
-                        // goto new state = table[STATE][NONTERMINAL]
-                        newState = table[stack[stack.length - 2]][stack[stack.length - 1]];
-                        stack.push(newState);
-                        break;
-
-                    case 3:
-                        // accept
-                        return true;
-                }
-
-            }
-
-            return true;
+var grammar = (function(){
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,6],$V1=[1,9],$V2=[1,10],$V3=[1,8],$V4=[2,5,14,15,16,22],$V5=[1,26],$V6=[1,18],$V7=[1,19],$V8=[1,20],$V9=[1,21],$Va=[1,22],$Vb=[1,23],$Vc=[1,24],$Vd=[1,25],$Ve=[1,38],$Vf=[1,29],$Vg=[1,30],$Vh=[1,31],$Vi=[1,32],$Vj=[1,33],$Vk=[1,34],$Vl=[1,35],$Vm=[1,36],$Vn=[1,37],$Vo=[1,39],$Vp=[1,40],$Vq=[13,23,25,26,27,28,29,30,31,32,33,34,35],$Vr=[1,59],$Vs=[13,25,26,27,28],$Vt=[13,23,25,26,27,28,29,30,31,32,33];
+var parser = {trace: function trace () { },
+yy: {},
+symbols_: {"error":2,"START":3,"INSTRUCTIONS":4,"EOF":5,"INSTRUCTION":6,"PRINT_INST":7,"semicolon":8,"IF_SENTENCE":9,"PRINT":10,"open_par":11,"EXPRESSION":12,"close_par":13,"print":14,"print_ln":15,"if":16,"INSTRUCTIONS_BLOCK":17,"MORE_IF_OPTIONS":18,"else":19,"ELSE_IF_ELSE":20,"open_brace":21,"close_brace":22,"minus":23,"not":24,"or":25,"and":26,"equals":27,"different":28,"less_than":29,"greater_than":30,"less_than_or_equal":31,"greater_than_or_equal":32,"plus":33,"multiply":34,"divide":35,"INTEGER":36,"DOUBLE":37,"true":38,"false":39,"char":40,"struct":41,"ATTRIBUTE_LIST":42,"comma":43,"ATTRIBUTE":44,"ATTRIBUTE_TYPE":45,"IDENTIFIERT":46,"int":47,"double":48,"boolean":49,"string":50,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",8:"semicolon",11:"open_par",13:"close_par",14:"print",15:"print_ln",16:"if",19:"else",21:"open_brace",22:"close_brace",23:"minus",24:"not",25:"or",26:"and",27:"equals",28:"different",29:"less_than",30:"greater_than",31:"less_than_or_equal",32:"greater_than_or_equal",33:"plus",34:"multiply",35:"divide",36:"INTEGER",37:"DOUBLE",38:"true",39:"false",40:"char",41:"struct",43:"comma",46:"IDENTIFIERT",47:"int",48:"double",49:"boolean",50:"string"},
+productions_: [0,[3,2],[4,2],[4,1],[6,2],[6,1],[6,2],[7,4],[10,1],[10,1],[9,6],[18,2],[18,0],[20,1],[20,1],[17,3],[12,2],[12,2],[12,3],[12,3],[12,3],[12,3],[12,3],[12,3],[12,3],[12,3],[12,3],[12,3],[12,3],[12,3],[12,1],[12,1],[12,1],[12,1],[12,1],[12,1],[12,3],[42,3],[42,1],[44,2],[45,1],[45,1],[45,1],[45,1],[45,1]],
+performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
+/* this == yyval */
+
+var $0 = $$.length - 1;
+switch (yystate) {
+case 1:
+
+		return $$[$0-1];
+	
+break;
+case 2:
+
+		this.$ = $$[$0-1];
+		this.$.children.push($$[$0]);
+	
+break;
+case 3:
+
+		this.$ = new Node_(NodeName.INSTRUCTIONS, "INSTRUCTIONS", -1, -1, [$$[$0]], new NodeData(-1, -1, -1, -1), false, false);
+	
+break;
+case 4:
+
+		this.$ = $$[$0-1];
+	
+break;
+case 5:
+
+		this.$ = $$[$0];
+	
+break;
+case 6:
+
+		var e = new Exception($$[$0-1], _$[$0-1].first_line, (_$[$0-1].first_column + 1), ExceptionType.SYNTACTIC);
+		Exception.exceptionList.push(e);
+	
+break;
+case 7:
+
+		this.$ = new Print(String($$[$0-3]), _$[$0-3].first_line, (_$[$0-3].first_column + 1), $$[$0-1]);
+	
+break;
+case 8: case 9:
+this.$ = String($$[$0]);
+break;
+case 10:
+
+		this.$ = new If(NodeName.IF, String($$[$0-5]), _$[$0-5].first_line, (_$[$0-5].first_column + 1), [$$[$0-3], $$[$0-1], $$[$0]]);
+	
+break;
+case 11:
+
+		$$[$0].line = _$[$0-1].first_line;
+		$$[$0].column = (_$[$0-1].first_column + 1);
+
+		this.$ = $$[$0];
+	
+break;
+case 13:
+
+		/*ELSE*/
+		this.$ = new Else([$$[$0]]);
+	
+break;
+case 14:
+
+		/*IF-ELSE-IF*/
+		this.$ = $$[$0];
+	
+break;
+case 15:
+
+		this.$ = $$[$0-1]
+	
+break;
+case 16:
+
+		var n = new Node_(NodeName.ARITHMETIC, "-", _$[$0-1].first_line, (_$[$0-1].first_column + 1), NodeReturnType.DOUBLE);
+		this.$ = new Expression([n, $$[$0]]);
+	
+break;
+case 17:
+
+		var n = new Node_(NodeName.LOGIC, "!", _$[$0-1].first_line, (_$[$0-1].first_column + 1), NodeReturnType.Boolean);
+		this.$ = new Expression([n, $$[$0]]);
+	
+break;
+case 18: case 19:
+
+		var n = new Node_(NodeName.LOGIC, String($$[$0-1]), _$[$0-2].first_line, (_$[$0-2].first_column + 1), NodeReturnType.BOOLEAN);
+		this.$ = new Expression([$$[$0-2], n, $$[$0]]);
+	
+break;
+case 20: case 21: case 22: case 23: case 24: case 25:
+
+		var n = new Node_(NodeName.RELATIONAL, String($$[$0-1]), _$[$0-2].first_line, (_$[$0-2].first_column + 1), NodeReturnType.BOOLEAN);
+		this.$ = new Expression([$$[$0-2], n, $$[$0]]);
+	
+break;
+case 26: case 27: case 28: case 29:
+
+		var n = new Node_(NodeName.ARITHMETIC, String($$[$0-1]), _$[$0-2].first_line, (_$[$0-2].first_column + 1), NodeReturnType.DOUBLE);
+		this.$ = new Expression([$$[$0-2], n, $$[$0]]);
+	
+break;
+case 30:
+
+		var pd = new PrimitiveData(NodeName.INTEGER, Number($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.INTEGER);
+		this.$ = new Expression([pd]);
+	
+break;
+case 31:
+
+		var pd = new PrimitiveData(NodeName.DOUBLE, Number($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.DOUBLE);
+		this.$ = new Expression([pd]);
+	
+break;
+case 32:
+
+		var pd = new PrimitiveData(NodeName.BOOLEAN, true, _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.BOOLEAN);
+		this.$ = new Expression([pd]);
+	
+break;
+case 33:
+
+		var pd = new PrimitiveData(NodeName.BOOLEAN, false, _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.BOOLEAN);
+		this.$ = new Expression([pd]);
+	
+break;
+case 34:
+
+		var pd = new PrimitiveData(NodeName.CHAR, String($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.CHAR);
+		this.$ = new Expression([pd]);
+	
+break;
+case 35:
+
+		var s = new PrimitiveData(NodeName.STRUCT, Struct($$[$0]), _$[$0].first_line, (_$[$0].first_column + 1), NodeReturnType.STRUCT);
+		this.$ = new Expression([s]);
+	
+break;
+case 36:
+
+		this.$ = new Expression([$$[$0-1]]);
+	
+break;
+case 37:
+
+		//código para js
+	
+break;
+}
+},
+table: [{2:$V0,3:1,4:2,6:3,7:4,9:5,10:7,14:$V1,15:$V2,16:$V3},{1:[3]},{2:$V0,5:[1,11],6:12,7:4,9:5,10:7,14:$V1,15:$V2,16:$V3},o($V4,[2,3]),{8:[1,13]},o($V4,[2,5]),{8:[1,14]},{11:[1,15]},{11:[1,16]},{11:[2,8]},{11:[2,9]},{1:[2,1]},o($V4,[2,2]),o($V4,[2,4]),o($V4,[2,6]),{11:$V5,12:17,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:27,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{13:[1,28],23:$Ve,25:$Vf,26:$Vg,27:$Vh,28:$Vi,29:$Vj,30:$Vk,31:$Vl,32:$Vm,33:$Vn,34:$Vo,35:$Vp},{11:$V5,12:41,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:42,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},o($Vq,[2,30]),o($Vq,[2,31]),o($Vq,[2,32]),o($Vq,[2,33]),o($Vq,[2,34]),o($Vq,[2,35]),{11:$V5,12:43,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{13:[1,44],23:$Ve,25:$Vf,26:$Vg,27:$Vh,28:$Vi,29:$Vj,30:$Vk,31:$Vl,32:$Vm,33:$Vn,34:$Vo,35:$Vp},{8:[2,7]},{11:$V5,12:45,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:46,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:47,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:48,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:49,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:50,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:51,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:52,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:53,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:54,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:55,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},{11:$V5,12:56,23:$V6,24:$V7,36:$V8,37:$V9,38:$Va,39:$Vb,40:$Vc,41:$Vd},o($Vq,[2,16]),o($Vq,[2,17]),{13:[1,57],23:$Ve,25:$Vf,26:$Vg,27:$Vh,28:$Vi,29:$Vj,30:$Vk,31:$Vl,32:$Vm,33:$Vn,34:$Vo,35:$Vp},{17:58,21:$Vr},o([13,25],[2,18],{23:$Ve,26:$Vg,27:$Vh,28:$Vi,29:$Vj,30:$Vk,31:$Vl,32:$Vm,33:$Vn,34:$Vo,35:$Vp}),o([13,25,26],[2,19],{23:$Ve,27:$Vh,28:$Vi,29:$Vj,30:$Vk,31:$Vl,32:$Vm,33:$Vn,34:$Vo,35:$Vp}),o($Vs,[2,20],{23:$Ve,29:$Vj,30:$Vk,31:$Vl,32:$Vm,33:$Vn,34:$Vo,35:$Vp}),o($Vs,[2,21],{23:$Ve,29:$Vj,30:$Vk,31:$Vl,32:$Vm,33:$Vn,34:$Vo,35:$Vp}),o($Vs,[2,22],{23:$Ve,33:$Vn,34:$Vo,35:$Vp}),o($Vs,[2,23],{23:$Ve,33:$Vn,34:$Vo,35:$Vp}),o($Vs,[2,24],{23:$Ve,33:$Vn,34:$Vo,35:$Vp}),o($Vs,[2,25],{23:$Ve,33:$Vn,34:$Vo,35:$Vp}),o($Vt,[2,26],{34:$Vo,35:$Vp}),o($Vt,[2,27],{34:$Vo,35:$Vp}),o($Vq,[2,28]),o($Vq,[2,29]),o($Vq,[2,36]),o($V4,[2,12],{18:60,19:[1,61]}),{2:$V0,4:62,6:3,7:4,9:5,10:7,14:$V1,15:$V2,16:$V3},o($V4,[2,10]),{9:65,16:$V3,17:64,20:63,21:$Vr},{2:$V0,6:12,7:4,9:5,10:7,14:$V1,15:$V2,16:$V3,22:[1,66]},o($V4,[2,11]),o($V4,[2,13]),o($V4,[2,14]),o([2,5,14,15,16,19,22],[2,15])],
+defaultActions: {9:[2,8],10:[2,9],11:[2,1],28:[2,7]},
+parseError: function parseError (str, hash) {
+    if (hash.recoverable) {
+        this.trace(str);
+    } else {
+        var error = new Error(str);
+        error.hash = hash;
+        throw error;
+    }
+},
+parse: function parse (input) {
+    var self = this,
+        stack = [0],
+        tstack = [], // token stack
+        vstack = [null], // semantic value stack
+        lstack = [], // location stack
+        table = this.table,
+        yytext = '',
+        yylineno = 0,
+        yyleng = 0,
+        recovering = 0,
+        TERROR = 2,
+        EOF = 1;
+
+    var args = lstack.slice.call(arguments, 1);
+
+    //this.reductionCount = this.shiftCount = 0;
+
+    var lexer = Object.create(this.lexer);
+    var sharedState = { yy: {} };
+    // copy state
+    for (var k in this.yy) {
+      if (Object.prototype.hasOwnProperty.call(this.yy, k)) {
+        sharedState.yy[k] = this.yy[k];
+      }
+    }
+
+    lexer.setInput(input, sharedState.yy);
+    sharedState.yy.lexer = lexer;
+    sharedState.yy.parser = this;
+    if (typeof lexer.yylloc == 'undefined') {
+        lexer.yylloc = {};
+    }
+    var yyloc = lexer.yylloc;
+    lstack.push(yyloc);
+
+    var ranges = lexer.options && lexer.options.ranges;
+
+    if (typeof sharedState.yy.parseError === 'function') {
+        this.parseError = sharedState.yy.parseError;
+    } else {
+        this.parseError = Object.getPrototypeOf(this).parseError;
+    }
+
+    function popStack (n) {
+        stack.length = stack.length - 2 * n;
+        vstack.length = vstack.length - n;
+        lstack.length = lstack.length - n;
+    }
+
+_token_stack:
+    var lex = function () {
+        var token;
+        token = lexer.lex() || EOF;
+        // if token isn't its numeric value, convert
+        if (typeof token !== 'number') {
+            token = self.symbols_[token] || token;
         }
-    };
+        return token;
+    }
 
+    var symbol, preErrorSymbol, state, action, a, r, yyval = {}, p, len, newState, expected;
+    while (true) {
+        // retreive state number from top of stack
+        state = stack[stack.length - 1];
 
-    /* generated by jison-lex 0.3.4 */
-    var lexer = (function () {
-        var lexer = ({
+        // use default actions if available
+        if (this.defaultActions[state]) {
+            action = this.defaultActions[state];
+        } else {
+            if (symbol === null || typeof symbol == 'undefined') {
+                symbol = lex();
+            }
+            // read action for current state and first input
+            action = table[state] && table[state][symbol];
+        }
 
-            EOF: 1,
+_handle_error:
+        // handle parse error
+        if (typeof action === 'undefined' || !action.length || !action[0]) {
+            var error_rule_depth;
+            var errStr = '';
 
-            parseError: function parseError(str, hash) {
-                if (this.yy.parser) {
-                    this.yy.parser.parseError(str, hash);
-                } else {
-                    throw new Error(str);
+            // Return the rule stack depth where the nearest error rule can be found.
+            // Return FALSE when no error recovery rule was found.
+            function locateNearestErrorRecoveryRule(state) {
+                var stack_probe = stack.length - 1;
+                var depth = 0;
+
+                // try to recover from error
+                for(;;) {
+                    // check for error recovery rule in this state
+                    if ((TERROR.toString()) in table[state]) {
+                        return depth;
+                    }
+                    if (state === 0 || stack_probe < 2) {
+                        return false; // No suitable error recovery rule available.
+                    }
+                    stack_probe -= 2; // popStack(1): [symbol, action]
+                    state = stack[stack_probe];
+                    ++depth;
                 }
-            },
+            }
 
-            // resets the lexer, sets new input
-            setInput: function (input, yy) {
-                this.yy = yy || this.yy || {};
-                this._input = input;
-                this._more = this._backtrack = this.done = false;
-                this.yylineno = this.yyleng = 0;
-                this.yytext = this.matched = this.match = '';
-                this.conditionStack = ['INITIAL'];
-                this.yylloc = {
-                    first_line: 1,
-                    first_column: 0,
-                    last_line: 1,
-                    last_column: 0
+            if (!recovering) {
+                // first see if there's any chance at hitting an error recovery rule:
+                error_rule_depth = locateNearestErrorRecoveryRule(state);
+
+                // Report error
+                expected = [];
+                for (p in table[state]) {
+                    if (this.terminals_[p] && p > TERROR) {
+                        expected.push("'"+this.terminals_[p]+"'");
+                    }
+                }
+                if (lexer.showPosition) {
+                    errStr = 'Parse error on line '+(yylineno+1)+":\n"+lexer.showPosition()+"\nExpecting "+expected.join(', ') + ", got '" + (this.terminals_[symbol] || symbol)+ "'";
+                } else {
+                    errStr = 'Parse error on line '+(yylineno+1)+": Unexpected " +
+                                  (symbol == EOF ? "end of input" :
+                                              ("'"+(this.terminals_[symbol] || symbol)+"'"));
+                }
+                this.parseError(errStr, {
+                    text: lexer.match,
+                    token: this.terminals_[symbol] || symbol,
+                    line: lexer.yylineno,
+                    loc: yyloc,
+                    expected: expected,
+                    recoverable: (error_rule_depth !== false)
+                });
+            } else if (preErrorSymbol !== EOF) {
+                error_rule_depth = locateNearestErrorRecoveryRule(state);
+            }
+
+            // just recovered from another error
+            if (recovering == 3) {
+                if (symbol === EOF || preErrorSymbol === EOF) {
+                    throw new Error(errStr || 'Parsing halted while starting to recover from another error.');
+                }
+
+                // discard current lookahead and grab another
+                yyleng = lexer.yyleng;
+                yytext = lexer.yytext;
+                yylineno = lexer.yylineno;
+                yyloc = lexer.yylloc;
+                symbol = lex();
+            }
+
+            // try to recover from error
+            if (error_rule_depth === false) {
+                throw new Error(errStr || 'Parsing halted. No suitable error recovery rule available.');
+            }
+            popStack(error_rule_depth);
+
+            preErrorSymbol = (symbol == TERROR ? null : symbol); // save the lookahead token
+            symbol = TERROR;         // insert generic error symbol as new lookahead
+            state = stack[stack.length-1];
+            action = table[state] && table[state][TERROR];
+            recovering = 3; // allow 3 real symbols to be shifted before reporting a new error
+        }
+
+        // this shouldn't happen, unless resolve defaults are off
+        if (action[0] instanceof Array && action.length > 1) {
+            throw new Error('Parse Error: multiple actions possible at state: '+state+', token: '+symbol);
+        }
+
+        switch (action[0]) {
+            case 1: // shift
+                //this.shiftCount++;
+
+                stack.push(symbol);
+                vstack.push(lexer.yytext);
+                lstack.push(lexer.yylloc);
+                stack.push(action[1]); // push state
+                symbol = null;
+                if (!preErrorSymbol) { // normal execution/no error
+                    yyleng = lexer.yyleng;
+                    yytext = lexer.yytext;
+                    yylineno = lexer.yylineno;
+                    yyloc = lexer.yylloc;
+                    if (recovering > 0) {
+                        recovering--;
+                    }
+                } else {
+                    // error just occurred, resume old lookahead f/ before error
+                    symbol = preErrorSymbol;
+                    preErrorSymbol = null;
+                }
+                break;
+
+            case 2:
+                // reduce
+                //this.reductionCount++;
+
+                len = this.productions_[action[1]][1];
+
+                // perform semantic action
+                yyval.$ = vstack[vstack.length-len]; // default to $$ = $1
+                // default location, uses first token for firsts, last for lasts
+                yyval._$ = {
+                    first_line: lstack[lstack.length-(len||1)].first_line,
+                    last_line: lstack[lstack.length-1].last_line,
+                    first_column: lstack[lstack.length-(len||1)].first_column,
+                    last_column: lstack[lstack.length-1].last_column
                 };
-                if (this.options.ranges) {
-                    this.yylloc.range = [0, 0];
+                if (ranges) {
+                  yyval._$.range = [lstack[lstack.length-(len||1)].range[0], lstack[lstack.length-1].range[1]];
                 }
-                this.offset = 0;
-                return this;
-            },
+                r = this.performAction.apply(yyval, [yytext, yyleng, yylineno, sharedState.yy, action[1], vstack, lstack].concat(args));
 
-            // consumes and returns one char from the input
-            input: function () {
-                var ch = this._input[0];
-                this.yytext += ch;
-                this.yyleng++;
-                this.offset++;
-                this.match += ch;
-                this.matched += ch;
-                var lines = ch.match(/(?:\r\n?|\n).*/g);
-                if (lines) {
-                    this.yylineno++;
-                    this.yylloc.last_line++;
-                } else {
-                    this.yylloc.last_column++;
-                }
-                if (this.options.ranges) {
-                    this.yylloc.range[1]++;
+                if (typeof r !== 'undefined') {
+                    return r;
                 }
 
-                this._input = this._input.slice(1);
-                return ch;
-            },
-
-            // unshifts one char (or a string) into the input
-            unput: function (ch) {
-                var len = ch.length;
-                var lines = ch.split(/(?:\r\n?|\n)/g);
-
-                this._input = ch + this._input;
-                this.yytext = this.yytext.substr(0, this.yytext.length - len);
-                //this.yyleng -= len;
-                this.offset -= len;
-                var oldLines = this.match.split(/(?:\r\n?|\n)/g);
-                this.match = this.match.substr(0, this.match.length - 1);
-                this.matched = this.matched.substr(0, this.matched.length - 1);
-
-                if (lines.length - 1) {
-                    this.yylineno -= lines.length - 1;
+                // pop off stack
+                if (len) {
+                    stack = stack.slice(0,-1*len*2);
+                    vstack = vstack.slice(0, -1*len);
+                    lstack = lstack.slice(0, -1*len);
                 }
-                var r = this.yylloc.range;
 
-                this.yylloc = {
+                stack.push(this.productions_[action[1]][0]);    // push nonterminal (reduce)
+                vstack.push(yyval.$);
+                lstack.push(yyval._$);
+                // goto new state = table[STATE][NONTERMINAL]
+                newState = table[stack[stack.length-2]][stack[stack.length-1]];
+                stack.push(newState);
+                break;
+
+            case 3:
+                // accept
+                return true;
+        }
+
+    }
+
+    return true;
+}};
+
+	
+/* generated by jison-lex 0.3.4 */
+var lexer = (function(){
+var lexer = ({
+
+EOF:1,
+
+parseError:function parseError(str, hash) {
+        if (this.yy.parser) {
+            this.yy.parser.parseError(str, hash);
+        } else {
+            throw new Error(str);
+        }
+    },
+
+// resets the lexer, sets new input
+setInput:function (input, yy) {
+        this.yy = yy || this.yy || {};
+        this._input = input;
+        this._more = this._backtrack = this.done = false;
+        this.yylineno = this.yyleng = 0;
+        this.yytext = this.matched = this.match = '';
+        this.conditionStack = ['INITIAL'];
+        this.yylloc = {
+            first_line: 1,
+            first_column: 0,
+            last_line: 1,
+            last_column: 0
+        };
+        if (this.options.ranges) {
+            this.yylloc.range = [0,0];
+        }
+        this.offset = 0;
+        return this;
+    },
+
+// consumes and returns one char from the input
+input:function () {
+        var ch = this._input[0];
+        this.yytext += ch;
+        this.yyleng++;
+        this.offset++;
+        this.match += ch;
+        this.matched += ch;
+        var lines = ch.match(/(?:\r\n?|\n).*/g);
+        if (lines) {
+            this.yylineno++;
+            this.yylloc.last_line++;
+        } else {
+            this.yylloc.last_column++;
+        }
+        if (this.options.ranges) {
+            this.yylloc.range[1]++;
+        }
+
+        this._input = this._input.slice(1);
+        return ch;
+    },
+
+// unshifts one char (or a string) into the input
+unput:function (ch) {
+        var len = ch.length;
+        var lines = ch.split(/(?:\r\n?|\n)/g);
+
+        this._input = ch + this._input;
+        this.yytext = this.yytext.substr(0, this.yytext.length - len);
+        //this.yyleng -= len;
+        this.offset -= len;
+        var oldLines = this.match.split(/(?:\r\n?|\n)/g);
+        this.match = this.match.substr(0, this.match.length - 1);
+        this.matched = this.matched.substr(0, this.matched.length - 1);
+
+        if (lines.length - 1) {
+            this.yylineno -= lines.length - 1;
+        }
+        var r = this.yylloc.range;
+
+        this.yylloc = {
+            first_line: this.yylloc.first_line,
+            last_line: this.yylineno + 1,
+            first_column: this.yylloc.first_column,
+            last_column: lines ?
+                (lines.length === oldLines.length ? this.yylloc.first_column : 0)
+                 + oldLines[oldLines.length - lines.length].length - lines[0].length :
+              this.yylloc.first_column - len
+        };
+
+        if (this.options.ranges) {
+            this.yylloc.range = [r[0], r[0] + this.yyleng - len];
+        }
+        this.yyleng = this.yytext.length;
+        return this;
+    },
+
+// When called from action, caches matched text and appends it on next action
+more:function () {
+        this._more = true;
+        return this;
+    },
+
+// When called from action, signals the lexer that this rule fails to match the input, so the next matching rule (regex) should be tested instead.
+reject:function () {
+        if (this.options.backtrack_lexer) {
+            this._backtrack = true;
+        } else {
+            return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. You can only invoke reject() in the lexer when the lexer is of the backtracking persuasion (options.backtrack_lexer = true).\n' + this.showPosition(), {
+                text: "",
+                token: null,
+                line: this.yylineno
+            });
+
+        }
+        return this;
+    },
+
+// retain first n characters of the match
+less:function (n) {
+        this.unput(this.match.slice(n));
+    },
+
+// displays already matched input, i.e. for error messages
+pastInput:function () {
+        var past = this.matched.substr(0, this.matched.length - this.match.length);
+        return (past.length > 20 ? '...':'') + past.substr(-20).replace(/\n/g, "");
+    },
+
+// displays upcoming input, i.e. for error messages
+upcomingInput:function () {
+        var next = this.match;
+        if (next.length < 20) {
+            next += this._input.substr(0, 20-next.length);
+        }
+        return (next.substr(0,20) + (next.length > 20 ? '...' : '')).replace(/\n/g, "");
+    },
+
+// displays the character position where the lexing error occurred, i.e. for error messages
+showPosition:function () {
+        var pre = this.pastInput();
+        var c = new Array(pre.length + 1).join("-");
+        return pre + this.upcomingInput() + "\n" + c + "^";
+    },
+
+// test the lexed token: return FALSE when not a match, otherwise return token
+test_match:function(match, indexed_rule) {
+        var token,
+            lines,
+            backup;
+
+        if (this.options.backtrack_lexer) {
+            // save context
+            backup = {
+                yylineno: this.yylineno,
+                yylloc: {
                     first_line: this.yylloc.first_line,
-                    last_line: this.yylineno + 1,
+                    last_line: this.last_line,
                     first_column: this.yylloc.first_column,
-                    last_column: lines ?
-                        (lines.length === oldLines.length ? this.yylloc.first_column : 0)
-                        + oldLines[oldLines.length - lines.length].length - lines[0].length :
-                        this.yylloc.first_column - len
-                };
+                    last_column: this.yylloc.last_column
+                },
+                yytext: this.yytext,
+                match: this.match,
+                matches: this.matches,
+                matched: this.matched,
+                yyleng: this.yyleng,
+                offset: this.offset,
+                _more: this._more,
+                _input: this._input,
+                yy: this.yy,
+                conditionStack: this.conditionStack.slice(0),
+                done: this.done
+            };
+            if (this.options.ranges) {
+                backup.yylloc.range = this.yylloc.range.slice(0);
+            }
+        }
 
-                if (this.options.ranges) {
-                    this.yylloc.range = [r[0], r[0] + this.yyleng - len];
-                }
-                this.yyleng = this.yytext.length;
-                return this;
-            },
+        lines = match[0].match(/(?:\r\n?|\n).*/g);
+        if (lines) {
+            this.yylineno += lines.length;
+        }
+        this.yylloc = {
+            first_line: this.yylloc.last_line,
+            last_line: this.yylineno + 1,
+            first_column: this.yylloc.last_column,
+            last_column: lines ?
+                         lines[lines.length - 1].length - lines[lines.length - 1].match(/\r?\n?/)[0].length :
+                         this.yylloc.last_column + match[0].length
+        };
+        this.yytext += match[0];
+        this.match += match[0];
+        this.matches = match;
+        this.yyleng = this.yytext.length;
+        if (this.options.ranges) {
+            this.yylloc.range = [this.offset, this.offset += this.yyleng];
+        }
+        this._more = false;
+        this._backtrack = false;
+        this._input = this._input.slice(match[0].length);
+        this.matched += match[0];
+        token = this.performAction.call(this, this.yy, this, indexed_rule, this.conditionStack[this.conditionStack.length - 1]);
+        if (this.done && this._input) {
+            this.done = false;
+        }
+        if (token) {
+            return token;
+        } else if (this._backtrack) {
+            // recover context
+            for (var k in backup) {
+                this[k] = backup[k];
+            }
+            return false; // rule action called reject() implying the next rule should be tested instead.
+        }
+        return false;
+    },
 
-            // When called from action, caches matched text and appends it on next action
-            more: function () {
-                this._more = true;
-                return this;
-            },
+// return next match in input
+next:function () {
+        if (this.done) {
+            return this.EOF;
+        }
+        if (!this._input) {
+            this.done = true;
+        }
 
-            // When called from action, signals the lexer that this rule fails to match the input, so the next matching rule (regex) should be tested instead.
-            reject: function () {
+        var token,
+            match,
+            tempMatch,
+            index;
+        if (!this._more) {
+            this.yytext = '';
+            this.match = '';
+        }
+        var rules = this._currentRules();
+        for (var i = 0; i < rules.length; i++) {
+            tempMatch = this._input.match(this.rules[rules[i]]);
+            if (tempMatch && (!match || tempMatch[0].length > match[0].length)) {
+                match = tempMatch;
+                index = i;
                 if (this.options.backtrack_lexer) {
-                    this._backtrack = true;
-                } else {
-                    return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. You can only invoke reject() in the lexer when the lexer is of the backtracking persuasion (options.backtrack_lexer = true).\n' + this.showPosition(), {
-                        text: "",
-                        token: null,
-                        line: this.yylineno
-                    });
-
-                }
-                return this;
-            },
-
-            // retain first n characters of the match
-            less: function (n) {
-                this.unput(this.match.slice(n));
-            },
-
-            // displays already matched input, i.e. for error messages
-            pastInput: function () {
-                var past = this.matched.substr(0, this.matched.length - this.match.length);
-                return (past.length > 20 ? '...' : '') + past.substr(-20).replace(/\n/g, "");
-            },
-
-            // displays upcoming input, i.e. for error messages
-            upcomingInput: function () {
-                var next = this.match;
-                if (next.length < 20) {
-                    next += this._input.substr(0, 20 - next.length);
-                }
-                return (next.substr(0, 20) + (next.length > 20 ? '...' : '')).replace(/\n/g, "");
-            },
-
-            // displays the character position where the lexing error occurred, i.e. for error messages
-            showPosition: function () {
-                var pre = this.pastInput();
-                var c = new Array(pre.length + 1).join("-");
-                return pre + this.upcomingInput() + "\n" + c + "^";
-            },
-
-            // test the lexed token: return FALSE when not a match, otherwise return token
-            test_match: function (match, indexed_rule) {
-                var token,
-                    lines,
-                    backup;
-
-                if (this.options.backtrack_lexer) {
-                    // save context
-                    backup = {
-                        yylineno: this.yylineno,
-                        yylloc: {
-                            first_line: this.yylloc.first_line,
-                            last_line: this.last_line,
-                            first_column: this.yylloc.first_column,
-                            last_column: this.yylloc.last_column
-                        },
-                        yytext: this.yytext,
-                        match: this.match,
-                        matches: this.matches,
-                        matched: this.matched,
-                        yyleng: this.yyleng,
-                        offset: this.offset,
-                        _more: this._more,
-                        _input: this._input,
-                        yy: this.yy,
-                        conditionStack: this.conditionStack.slice(0),
-                        done: this.done
-                    };
-                    if (this.options.ranges) {
-                        backup.yylloc.range = this.yylloc.range.slice(0);
-                    }
-                }
-
-                lines = match[0].match(/(?:\r\n?|\n).*/g);
-                if (lines) {
-                    this.yylineno += lines.length;
-                }
-                this.yylloc = {
-                    first_line: this.yylloc.last_line,
-                    last_line: this.yylineno + 1,
-                    first_column: this.yylloc.last_column,
-                    last_column: lines ?
-                        lines[lines.length - 1].length - lines[lines.length - 1].match(/\r?\n?/)[0].length :
-                        this.yylloc.last_column + match[0].length
-                };
-                this.yytext += match[0];
-                this.match += match[0];
-                this.matches = match;
-                this.yyleng = this.yytext.length;
-                if (this.options.ranges) {
-                    this.yylloc.range = [this.offset, this.offset += this.yyleng];
-                }
-                this._more = false;
-                this._backtrack = false;
-                this._input = this._input.slice(match[0].length);
-                this.matched += match[0];
-                token = this.performAction.call(this, this.yy, this, indexed_rule, this.conditionStack[this.conditionStack.length - 1]);
-                if (this.done && this._input) {
-                    this.done = false;
-                }
-                if (token) {
-                    return token;
-                } else if (this._backtrack) {
-                    // recover context
-                    for (var k in backup) {
-                        this[k] = backup[k];
-                    }
-                    return false; // rule action called reject() implying the next rule should be tested instead.
-                }
-                return false;
-            },
-
-            // return next match in input
-            next: function () {
-                if (this.done) {
-                    return this.EOF;
-                }
-                if (!this._input) {
-                    this.done = true;
-                }
-
-                var token,
-                    match,
-                    tempMatch,
-                    index;
-                if (!this._more) {
-                    this.yytext = '';
-                    this.match = '';
-                }
-                var rules = this._currentRules();
-                for (var i = 0; i < rules.length; i++) {
-                    tempMatch = this._input.match(this.rules[rules[i]]);
-                    if (tempMatch && (!match || tempMatch[0].length > match[0].length)) {
-                        match = tempMatch;
-                        index = i;
-                        if (this.options.backtrack_lexer) {
-                            token = this.test_match(tempMatch, rules[i]);
-                            if (token !== false) {
-                                return token;
-                            } else if (this._backtrack) {
-                                match = false;
-                                continue; // rule action called reject() implying a rule MISmatch.
-                            } else {
-                                // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
-                                return false;
-                            }
-                        } else if (!this.options.flex) {
-                            break;
-                        }
-                    }
-                }
-                if (match) {
-                    token = this.test_match(match, rules[index]);
+                    token = this.test_match(tempMatch, rules[i]);
                     if (token !== false) {
                         return token;
+                    } else if (this._backtrack) {
+                        match = false;
+                        continue; // rule action called reject() implying a rule MISmatch.
+                    } else {
+                        // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
+                        return false;
                     }
-                    // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
-                    return false;
+                } else if (!this.options.flex) {
+                    break;
                 }
-                if (this._input === "") {
-                    return this.EOF;
-                } else {
-                    return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. Unrecognized text.\n' + this.showPosition(), {
-                        text: "",
-                        token: null,
-                        line: this.yylineno
-                    });
-                }
-            },
+            }
+        }
+        if (match) {
+            token = this.test_match(match, rules[index]);
+            if (token !== false) {
+                return token;
+            }
+            // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
+            return false;
+        }
+        if (this._input === "") {
+            return this.EOF;
+        } else {
+            return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. Unrecognized text.\n' + this.showPosition(), {
+                text: "",
+                token: null,
+                line: this.yylineno
+            });
+        }
+    },
 
-            // return next match that has a token
-            lex: function lex() {
-                var r = this.next();
-                if (r) {
-                    return r;
-                } else {
-                    return this.lex();
-                }
-            },
+// return next match that has a token
+lex:function lex () {
+        var r = this.next();
+        if (r) {
+            return r;
+        } else {
+            return this.lex();
+        }
+    },
 
-            // activates a new lexer condition state (pushes the new lexer condition state onto the condition stack)
-            begin: function begin(condition) {
-                this.conditionStack.push(condition);
-            },
+// activates a new lexer condition state (pushes the new lexer condition state onto the condition stack)
+begin:function begin (condition) {
+        this.conditionStack.push(condition);
+    },
 
-            // pop the previously active lexer condition state off the condition stack
-            popState: function popState() {
-                var n = this.conditionStack.length - 1;
-                if (n > 0) {
-                    return this.conditionStack.pop();
-                } else {
-                    return this.conditionStack[0];
-                }
-            },
+// pop the previously active lexer condition state off the condition stack
+popState:function popState () {
+        var n = this.conditionStack.length - 1;
+        if (n > 0) {
+            return this.conditionStack.pop();
+        } else {
+            return this.conditionStack[0];
+        }
+    },
 
-            // produce the lexer rule set which is active for the currently active lexer condition state
-            _currentRules: function _currentRules() {
-                if (this.conditionStack.length && this.conditionStack[this.conditionStack.length - 1]) {
-                    return this.conditions[this.conditionStack[this.conditionStack.length - 1]].rules;
-                } else {
-                    return this.conditions["INITIAL"].rules;
-                }
-            },
+// produce the lexer rule set which is active for the currently active lexer condition state
+_currentRules:function _currentRules () {
+        if (this.conditionStack.length && this.conditionStack[this.conditionStack.length - 1]) {
+            return this.conditions[this.conditionStack[this.conditionStack.length - 1]].rules;
+        } else {
+            return this.conditions["INITIAL"].rules;
+        }
+    },
 
-            // return the currently active lexer condition state; when an index argument is provided it produces the N-th previous condition state, if available
-            topState: function topState(n) {
-                n = this.conditionStack.length - 1 - Math.abs(n || 0);
-                if (n >= 0) {
-                    return this.conditionStack[n];
-                } else {
-                    return "INITIAL";
-                }
-            },
+// return the currently active lexer condition state; when an index argument is provided it produces the N-th previous condition state, if available
+topState:function topState (n) {
+        n = this.conditionStack.length - 1 - Math.abs(n || 0);
+        if (n >= 0) {
+            return this.conditionStack[n];
+        } else {
+            return "INITIAL";
+        }
+    },
 
-            // alias for begin(condition)
-            pushState: function pushState(condition) {
-                this.begin(condition);
-            },
+// alias for begin(condition)
+pushState:function pushState (condition) {
+        this.begin(condition);
+    },
 
-            // return the number of states currently on the stack
-            stateStackSize: function stateStackSize() {
-                return this.conditionStack.length;
-            },
-            options: { "case-sensitive": true },
-            performAction: function anonymous(yy, yy_, $avoiding_name_collisions, YY_START) {
-                var YYSTATE = YY_START;
-                switch ($avoiding_name_collisions) {
-                    case 0:// One line comment 
-                        break;
-                    case 1:// Multi-Line comment
-                        break;
-                    case 2: return 'dot';
-                        break;
-                    case 3: return 35;
-                        break;
-                    case 4: return 'colon';
-                        break;
-                    case 5: return 8;
-                        break;
-                    case 6: return 10;
-                        break;
-                    case 7: return 12;
-                        break;
-                    case 8: return 'open_bracket';
-                        break;
-                    case 9: return 'close_bracket';
-                        break;
-                    case 10: return 'open_brace';
-                        break;
-                    case 11: return 'close_brace';
-                        break;
-                    case 12: return 'copy';
-                        break;
-                    case 13: return 'equal_simple';
-                        break;
-                    case 14: return 25;
-                        break;
-                    case 15: return 15;
-                        break;
-                    case 16: return 26;
-                        break;
-                    case 17: return 27;
-                        break;
-                    case 18: return 'percent';
-                        break;
-                    case 19: return 'null';
-                        break;
-                    case 20: return 39;
-                        break;
-                    case 21: return 40;
-                        break;
-                    case 22: return 41;
-                        break;
-                    case 23: return 30;
-                        break;
-                    case 24: return 31;
-                        break;
-                    case 25: return 32;
-                        break;
-                    case 26: return 42;
-                        break;
-                    case 27: return 33;
-                        break;
-                    case 28: return 'void';
-                        break;
-                    case 29: return 'power';
-                        break;
-                    case 30: return 'sqrt_root';
-                        break;
-                    case 31: return 'sine';
-                        break;
-                    case 32: return 'cosine';
-                        break;
-                    case 33: return 'tangent';
-                        break;
-                    case 34: return 'logarithm';
-                        break;
-                    case 35: return 'parse';
-                        break;
-                    case 36: return 'to_int';
-                        break;
-                    case 37: return 'to_double';
-                        break;
-                    case 38: return 'to_string';
-                        break;
-                    case 39: return 'type_of';
-                        break;
-                    case 40: return 13;
-                        break;
-                    case 41: return 14;
-                        break;
-                    case 42: return 'push';
-                        break;
-                    case 43: return 'pop';
-                        break;
-                    case 44: return 'char_at';
-                        break;
-                    case 45: return 'substring';
-                        break;
-                    case 46: return 'length';
-                        break;
-                    case 47: return 'to_upper_case';
-                        break;
-                    case 48: return 'to_lower_case';
-                        break;
-                    case 49: return 23;
-                        break;
-                    case 50: return 24;
-                        break;
-                    case 51: return 19;
-                        break;
-                    case 52: return 20;
-                        break;
-                    case 53: return 21;
-                        break;
-                    case 54: return 22;
-                        break;
-                    case 55: return 23;
-                        break;
-                    case 56: return 24;
-                        break;
-                    case 57: return 18;
-                        break;
-                    case 58: return 17;
-                        break;
-                    case 59: return 16;
-                        break;
-                    case 60: return 'ternary';
-                        break;
-                    case 61: return 'concat';
-                        break;
-                    case 62: return 'repeat';
-                        break;
-                    case 63: return 'value';
-                        break;
-                    case 64: return 'assign';
-                        break;
-                    case 65: return 'if';
-                        break;
-                    case 66: return 'else';
-                        break;
-                    case 67: return 'switch';
-                        break;
-                    case 68: return 'case';
-                        break;
-                    case 69: return 'default';
-                        break;
-                    case 70: return 'while';
-                        break;
-                    case 71: return 'do';
-                        break;
-                    case 72: return 'for';
-                        break;
-                    case 73: return 'in';
-                        break;
-                    case 74:
-                        break;
-                    case 75:
-                        break;
-                    case 76: return 29;
-                        break;
-                    case 77: return 28;
-                        break;
-                    case 78: return 38;
-                        break;
-                    case 79: return 5;
-                        break;
-                    case 80:
-                        var e = new Exception(yy_.yytext, yy_.yylloc.first_line, (yy_.yylloc.first_column + 1), ExceptionType.LEXICAL);
-                        Exception.exceptionList.push(e);
+// return the number of states currently on the stack
+stateStackSize:function stateStackSize() {
+        return this.conditionStack.length;
+    },
+options: {"case-sensitive":true},
+performAction: function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
+var YYSTATE=YY_START;
+switch($avoiding_name_collisions) {
+case 0:// One line comment 
+break;
+case 1:// Multi-Line comment
+break;
+case 2:return 'dot';
+break;
+case 3:return 43;
+break;
+case 4:return 'colon';
+break;
+case 5:return 8;
+break;
+case 6:return 11;
+break;
+case 7:return 13;
+break;
+case 8:return 'open_bracket';
+break;
+case 9:return 'close_bracket';
+break;
+case 10:return 21;
+break;
+case 11:return 22;
+break;
+case 12:return 'copy';
+break;
+case 13:return 'equal_simple';
+break;
+case 14:return 33;
+break;
+case 15:return 23;
+break;
+case 16:return 34;
+break;
+case 17:return 35;
+break;
+case 18:return 'percent';  
+break;
+case 19:return 'null';
+break;
+case 20:return 47;
+break;
+case 21:return 48;
+break;
+case 22:return 49;
+break;
+case 23:return 38;
+break;
+case 24:return 39;
+break;
+case 25:return 40;
+break;
+case 26:return 50;
+break;
+case 27:return 41;
+break;
+case 28:return 'void';
+break;
+case 29:return 'power';
+break;
+case 30:return 'sqrt_root';
+break;
+case 31:return 'sine';
+break;
+case 32:return 'cosine';
+break;
+case 33:return 'tangent';
+break;
+case 34:return 'logarithm';
+break;
+case 35:return 'parse';
+break;
+case 36:return 'to_int';
+break;
+case 37:return 'to_double';
+break;
+case 38:return 'to_string';
+break;
+case 39:return 'type_of';
+break;
+case 40:return 14;
+break;
+case 41:return 15;
+break;
+case 42:return 'push';
+break;
+case 43:return 'pop';
+break;
+case 44:return 'char_at';
+break;
+case 45:return 'substring';
+break;
+case 46:return 'length';
+break;
+case 47:return 'to_upper_case';
+break;
+case 48:return 'to_lower_case';
+break;
+case 49:return 31;
+break;
+case 50:return 32;
+break;
+case 51:return 27;
+break;
+case 52:return 28;
+break;
+case 53:return 29;
+break;
+case 54:return 30;
+break;
+case 55:return 31;
+break;
+case 56:return 32;
+break;
+case 57:return 26;
+break;
+case 58:return 25;
+break;
+case 59:return 24;
+break;
+case 60:return 'ternary';
+break;
+case 61:return 'concat';
+break;
+case 62:return 'repeat';
+break;
+case 63:return 'value';
+break;
+case 64:return 'assign';
+break;
+case 65:return 16;
+break;
+case 66:return 19;
+break;
+case 67:return 'switch';
+break;
+case 68:return 'case';
+break;
+case 69:return 'default';
+break;
+case 70:return 'while';
+break;
+case 71:return 'do';
+break;
+case 72:return 'for';
+break;
+case 73:return 'in';
+break;
+case 74:
+break;
+case 75:
+break;
+case 76:return 37;
+break;
+case 77:return 36;
+break;
+case 78:return 46;
+break;
+case 79:return 5;
+break;
+case 80:
+	var e = new Exception(yy_.yytext, yy_.yylloc.first_line, (yy_.yylloc.first_column + 1), ExceptionType.LEXICAL);
+	Exception.exceptionList.push(e);
 
-                        break;
-                }
-            },
-            rules: [/^(?:\/\/.*)/, /^(?:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/])/, /^(?:\.)/, /^(?:,)/, /^(?::)/, /^(?:;)/, /^(?:\()/, /^(?:\))/, /^(?:\[)/, /^(?:\])/, /^(?:\{)/, /^(?:\})/, /^(?:#)/, /^(?:=)/, /^(?:\+)/, /^(?:-)/, /^(?:\*)/, /^(?:\/)/, /^(?:%)/, /^(?:null\b)/, /^(?:int\b)/, /^(?:double\b)/, /^(?:boolean\b)/, /^(?:true\b)/, /^(?:false\b)/, /^(?:char\b)/, /^(?:String\b)/, /^(?:struct\b)/, /^(?:void\b)/, /^(?:pow\b)/, /^(?:sqrt\b)/, /^(?:sin\b)/, /^(?:cos\b)/, /^(?:tan\b)/, /^(?:log10\b)/, /^(?:parse\b)/, /^(?:toInt\b)/, /^(?:toDouble\b)/, /^(?:string\b)/, /^(?:typeof\b)/, /^(?:print\b)/, /^(?:println\b)/, /^(?:push\b)/, /^(?:pop\b)/, /^(?:characterOfPosition\b)/, /^(?:subString\b)/, /^(?:length\b)/, /^(?:toUppercase\b)/, /^(?:toLowercase\b)/, /^(?:<=)/, /^(?:>=)/, /^(?:==)/, /^(?:!=)/, /^(?:<)/, /^(?:>)/, /^(?:<=)/, /^(?:>=)/, /^(?:&&)/, /^(?:\|\|)/, /^(?:!)/, /^(?:\?)/, /^(?:&)/, /^(?:\^)/, /^(?:\$)/, /^(?:=)/, /^(?:if\b)/, /^(?:else\b)/, /^(?:switch\b)/, /^(?:case\b)/, /^(?:default\b)/, /^(?:while\b)/, /^(?:do\b)/, /^(?:for\b)/, /^(?:in\b)/, /^(?:[ \r\t]+)/, /^(?:\n)/, /^(?:[0-9]+(\.[0-9]+)?\b)/, /^(?:[0-9]+\b)/, /^(?:(_[a-zA-Z])[a-zA-Z0-9_]*)/, /^(?:$)/, /^(?:.)/],
-            conditions: { "INITIAL": { "rules": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80], "inclusive": true } }
-        });
-        return lexer;
-    })();
-    parser.lexer = lexer;
-    function Parser() {
-        this.yy = {};
-    }
-    Parser.prototype = parser; parser.Parser = Parser;
-    return new Parser;
+break;
+}
+},
+rules: [/^(?:\/\/.*)/,/^(?:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/])/,/^(?:\.)/,/^(?:,)/,/^(?::)/,/^(?:;)/,/^(?:\()/,/^(?:\))/,/^(?:\[)/,/^(?:\])/,/^(?:\{)/,/^(?:\})/,/^(?:#)/,/^(?:=)/,/^(?:\+)/,/^(?:-)/,/^(?:\*)/,/^(?:\/)/,/^(?:%)/,/^(?:null\b)/,/^(?:int\b)/,/^(?:double\b)/,/^(?:boolean\b)/,/^(?:true\b)/,/^(?:false\b)/,/^(?:char\b)/,/^(?:String\b)/,/^(?:struct\b)/,/^(?:void\b)/,/^(?:pow\b)/,/^(?:sqrt\b)/,/^(?:sin\b)/,/^(?:cos\b)/,/^(?:tan\b)/,/^(?:log10\b)/,/^(?:parse\b)/,/^(?:toInt\b)/,/^(?:toDouble\b)/,/^(?:string\b)/,/^(?:typeof\b)/,/^(?:print\b)/,/^(?:println\b)/,/^(?:push\b)/,/^(?:pop\b)/,/^(?:characterOfPosition\b)/,/^(?:subString\b)/,/^(?:length\b)/,/^(?:toUppercase\b)/,/^(?:toLowercase\b)/,/^(?:<=)/,/^(?:>=)/,/^(?:==)/,/^(?:!=)/,/^(?:<)/,/^(?:>)/,/^(?:<=)/,/^(?:>=)/,/^(?:&&)/,/^(?:\|\|)/,/^(?:!)/,/^(?:\?)/,/^(?:&)/,/^(?:\^)/,/^(?:\$)/,/^(?:=)/,/^(?:if\b)/,/^(?:else\b)/,/^(?:switch\b)/,/^(?:case\b)/,/^(?:default\b)/,/^(?:while\b)/,/^(?:do\b)/,/^(?:for\b)/,/^(?:in\b)/,/^(?:[ \r\t]+)/,/^(?:\n)/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:[0-9]+\b)/,/^(?:(_[a-zA-Z])[a-zA-Z0-9_]*)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80],"inclusive":true}}
+});
+return lexer;
+})();
+parser.lexer = lexer;
+function Parser () {
+  this.yy = {};
+}
+Parser.prototype = parser;parser.Parser = Parser;
+return new Parser;
 })();
 
 
 if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
-    exports.parser = grammar;
-    exports.Parser = grammar.Parser;
-    exports.parse = function () { return grammar.parse.apply(grammar, arguments); };
-    exports.main = function commonjsMain(args) {
-        if (!args[1]) {
-            console.log('Usage: ' + args[0] + ' FILE');
-            process.exit(1);
-        }
-        var source = require('fs').readFileSync(require('path').normalize(args[1]), "utf8");
-        return exports.parser.parse(source);
-    };
-    if (typeof module !== 'undefined' && require.main === module) {
-        exports.main(process.argv.slice(1));
+exports.parser = grammar;
+exports.Parser = grammar.Parser;
+exports.parse = function () { return grammar.parse.apply(grammar, arguments); };
+exports.main = function commonjsMain (args) {
+    if (!args[1]) {
+        console.log('Usage: '+args[0]+' FILE');
+        process.exit(1);
     }
+    var source = require('fs').readFileSync(require('path').normalize(args[1]), "utf8");
+    return exports.parser.parse(source);
+};
+if (typeof module !== 'undefined' && require.main === module) {
+  exports.main(process.argv.slice(1));
+}
 }
