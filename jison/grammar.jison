@@ -99,7 +99,7 @@
 [ \r\t]+            {}
 \n                  {}
 /* REGEX */
-[0-9]+("."[0-9]+)?\b    return 'DOUBLE';
+[0-9]+("."[0-9]+)\b    return 'DOUBLE';
 [0-9]+\b                return 'INTEGER';
 (_[a-zA-Z])[a-zA-Z0-9_]* return 'IDENTIFIERT';
 
@@ -131,7 +131,7 @@
 START
 	: INSTRUCTIONS EOF {
 		return $1;
-	}
+	} 
 ;
 
 INSTRUCTIONS
@@ -140,6 +140,17 @@ INSTRUCTIONS
 		$$.children.push($2);
 	} | INSTRUCTION {
 		$$ = new Node_(NodeName.INSTRUCTIONS, "INSTRUCTIONS", -1, -1, [$1], new NodeData(-1, -1, -1, -1), false, false);
+	} | error semicolon {
+		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
+		Exception.exceptionList.push(e);
+	}
+;
+
+SCAPE
+	: semicolon {
+		$$ = $1;
+	} | close_brace {
+		$$ = $1;
 	}
 ;
 
@@ -148,15 +159,17 @@ INSTRUCTION
 		$$ = $1;
 	} | IF_SENTENCE {
 		$$ = $1;
-	} | error semicolon {
+	} | WHILE_SENTENCE {
+
+	} | error SCAPE {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
 		Exception.exceptionList.push(e);
-	}
+	} 
 ;
 
 PRINT_INST
 	: PRINT open_par EXPRESSION close_par {
-		$$ = new Print(String($1), @1.first_line, (@1.first_column + 1), $3);
+		$$ = new Print(String($1), @1.first_line, (@1.first_column + 1), [$3]);
 	}
 ;
 
@@ -198,48 +211,54 @@ INSTRUCTIONS_BLOCK
 	}
 ;
 
+WHILE_SENTENCE
+	: while open_par EXPRESSION close_par INSTRUCTIONS_BLOCK {
+
+	}
+;
+
 EXPRESSION
 	: minus EXPRESSION %prec uminus {
-		var n = new Node_(NodeName.ARITHMETIC, "-", @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		var n = new Node_(NodeName.ARITHMETIC, "-", @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.DOUBLE, -1, -1), false, false);
 		$$ = new Expression([n, $2]);
 	} | not EXPRESSION %prec unot {
-		var n = new Node_(NodeName.LOGIC, "!", @1.first_line, (@1.first_column + 1), NodeReturnType.Boolean);
+		var n = new Node_(NodeName.LOGIC, "!", @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([n, $2]);
 	} | EXPRESSION or EXPRESSION {
-		var n = new Node_(NodeName.LOGIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.LOGIC, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION and EXPRESSION {
-		var n = new Node_(NodeName.LOGIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.LOGIC, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION equals EXPRESSION {
-		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION different EXPRESSION {
-		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION less_than EXPRESSION {
-		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION greater_than EXPRESSION {
-		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION less_than_or_equal EXPRESSION {
-		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION greater_than_or_equal EXPRESSION {
-		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.BOOLEAN);
+		var n = new Node_(NodeName.RELATIONAL, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.BOOLEAN, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION plus EXPRESSION {
-		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.DOUBLE, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION minus EXPRESSION {
-		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.DOUBLE, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION multiply EXPRESSION {
-		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.DOUBLE, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | EXPRESSION divide EXPRESSION {
-		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), NodeReturnType.DOUBLE);
+		var n = new Node_(NodeName.ARITHMETIC, String($2), @1.first_line, (@1.first_column + 1), [], new NodeData(-1, NodeReturnType.DOUBLE, -1, -1), false, false);
 		$$ = new Expression([$1, n, $3]);
 	} | INTEGER {
 		var pd = new PrimitiveData(NodeName.INTEGER, Number($1), @1.first_line, (@1.first_column + 1), NodeReturnType.INTEGER);

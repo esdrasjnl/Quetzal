@@ -7,7 +7,7 @@ config = {
     theme: "ambiance",
     indentWithTabs: false,
     readOnly: false,
-    mode: "xml",
+    mode: "javascript",
     autoCloseBrackets: true
 };
 
@@ -29,6 +29,7 @@ function run() {
         root.children.forEach(child => {
           if (child  != ';') {
             child.run(global);
+            console.log("Exitoso...!");
           }
         });
       }      
@@ -44,7 +45,7 @@ function reportAST(){
     clickedTab.innerHTML = "";
     clickedTab.innerHTML = "<h3>Reporte AST</h3>"
 
-    console.log(graficar);
+    //console.log(graficar);
     var viz = new Viz();
     viz.renderSVGElement(graficar).then(function (element) {
       clickedTab.appendChild(element);
