@@ -81,6 +81,7 @@ NodeName.LOGIC = 75;
 NodeName.RELATIONAL = 76;
 NodeName.ROOT = 76;
 NodeName.INSTRUCTIONS = 77;
+NodeName.DO_WHILE = 78;
 NodeName.nodeName = [
     "DOT",
     "COMMA",
@@ -159,5 +160,6 @@ NodeName.nodeName = [
     "LOGIC",
     "RELATIONAL",
     "ROOT",
-    "INSTRUCTIONS"
+    "INSTRUCTIONS",
+    "DO_WHILE"
 ];

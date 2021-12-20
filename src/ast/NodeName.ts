@@ -77,6 +77,7 @@ class NodeName{
     public static readonly RELATIONAL = 76;
     public static readonly ROOT = 76;
     public static readonly INSTRUCTIONS = 77;
+    public static readonly DO_WHILE = 78;
 
     public static readonly nodeName = [
         "DOT",
@@ -156,7 +157,8 @@ class NodeName{
         "LOGIC",
         "RELATIONAL",
         "ROOT",
-        "INSTRUCTIONS"
+        "INSTRUCTIONS",
+        "DO_WHILE"
     ];
 
     constructor(){
