@@ -79,8 +79,11 @@ NodeName.PRIMITIVE_DATA = 73;
 NodeName.ARITHMETIC = 74;
 NodeName.LOGIC = 75;
 NodeName.RELATIONAL = 76;
-NodeName.ROOT = 76;
-NodeName.INSTRUCTIONS = 77;
+NodeName.ROOT = 77;
+NodeName.INSTRUCTIONS = 78;
+NodeName.ID_LIST = 79;
+NodeName.TYPE = 80;
+NodeName.ID = 81;
 NodeName.nodeName = [
     "DOT",
     "COMMA",
@@ -159,5 +162,8 @@ NodeName.nodeName = [
     "LOGIC",
     "RELATIONAL",
     "ROOT",
-    "INSTRUCTIONS"
+    "INSTRUCTIONS",
+    "ID_LIST",
+    "TYPE",
+    "ID"
 ];
