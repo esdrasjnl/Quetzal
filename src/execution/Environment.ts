@@ -1,13 +1,13 @@
 class Environment {
     public previous: Environment | null;
-    private symbolsTable: Map<string, Node_>;
+    private symbolsTable: Map<string, Variable>;
 
     constructor(previous: Environment | null){
         this.previous = previous;
         this.symbolsTable = new Map();
     }
 
-    public putSymbol(key: string, value: Node_) {
+    public putSymbol(key: string, value: Variable) {
         this.symbolsTable.set(key, value);
     }
 

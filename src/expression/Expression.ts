@@ -10,7 +10,7 @@ class Expression extends Node_{
             if (this.children[0] instanceof PrimitiveData) {
                 return this.children[0].value;
             } else { //IDENTIFIER
-                return env.getSymbol(this.children[0].value);
+                return env.getSymbol(this.children[0].value)?.value?.run(env);
             }
         }
     }
