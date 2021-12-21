@@ -4,6 +4,7 @@ class Expression extends Node_ {
         super(NodeName.EXPRESSION, null, -1, -1, children, new NodeData(-1, -1, -1, -1), false, false);
     }
     run(env) {
+        var _a, _b;
         if (this.children.length > 1) {
             return this.operate(this, env);
         }
@@ -12,7 +13,7 @@ class Expression extends Node_ {
                 return this.children[0].value;
             }
             else { //IDENTIFIER
-                return env.getSymbol(this.children[0].value);
+                return (_b = (_a = env.getSymbol(this.children[0].value)) === null || _a === void 0 ? void 0 : _a.value) === null || _b === void 0 ? void 0 : _b.run(env);
             }
         }
     }
