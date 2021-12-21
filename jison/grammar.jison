@@ -152,6 +152,8 @@ INSTRUCTION
 		$$ = $1;
 	} | DECLARATION semicolon {
 		$$ = $1;
+	} | ASSINGMENT semicolon {
+		$$ = $1;
 	} | error SCAPE {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
 		Exception.exceptionList.push(e);
@@ -194,6 +196,13 @@ ID_LIST
 	} | IDENTIFIER {
 		var id = new Id(NodeName.ID, String($1), @1.first_line, (@1.first_column + 1));
 		$$ = new Node_(NodeName.ID_LIST, "", -1, -1, [id], new NodeData(-1, -1, -1, -1), false, false);
+	}
+;
+
+ASSINGMENT
+	: IDENTIFIER assign EXPRESSION {
+		var id = new Id(NodeName.ID, String($1), @1.first_line, (@1.first_column + 1));
+		$$ = new Assignment(@1.first_line, (@1.first_column + 1), [id, $3]);
 	}
 ;
 
