@@ -84,6 +84,7 @@ NodeName.INSTRUCTIONS = 78;
 NodeName.ID_LIST = 79;
 NodeName.TYPE = 80;
 NodeName.ID = 81;
+NodeName.DO_WHILE = 82;
 NodeName.nodeName = [
     "DOT",
     "COMMA",
@@ -165,5 +166,6 @@ NodeName.nodeName = [
     "INSTRUCTIONS",
     "ID_LIST",
     "TYPE",
-    "ID"
+    "ID",
+    "DO_WHILE"
 ];

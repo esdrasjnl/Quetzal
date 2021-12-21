@@ -7,6 +7,7 @@
 %lex
 
 %options case-sensitive
+%x STRING
 
 %%
 /* COMMENTS */
@@ -102,7 +103,18 @@
 [0-9]+\b                   return 'INTEGER';
 [a-zA-Z_][a-zA-Z0-9_]*\b   return 'IDENTIFIER';
 
-<<EOF>>                    return 'EOF';
+["]                           {    string = ""; this.begin("STRING"); }
+[']                           {    string = ""; this.begin("STRING"); }
+<STRING>\"                   %{    this.begin('INITIAL'); yytext=""; yytext=string;  return 'string_tk'; %}      
+<STRING>[\']                 %{    this.begin('INITIAL'); yytext=""; yytext=string;  return 'string_tk'; %}      
+<STRING>[^\n\r\"\\']+        %{    string+=yytext;  %}
+<STRING>'\t'                 %{    string+="\t";    %}
+<STRING>'\n'                 %{    string+="\n";    %}
+<STRING>'\r'                 %{    string+="\r";    %}
+<STRING>'\\"'                %{    string+='\"';    %}
+<STRING>'\\'                 %{    string+='\\';    %}
+
+<<EOF>>                 return 'EOF';
 
 .+ {
 	var e = new Exception(yytext, yylloc.first_line, (yylloc.first_column + 1), ExceptionType.LEXICAL);
@@ -154,6 +166,10 @@ INSTRUCTION
 		$$ = $1;
 	} | ASSINGMENT semicolon {
 		$$ = $1;
+	} | FOR_SENTENCE {
+		$$ = $1;
+	} | DO_WHILE_SENTENCE {
+		$$ = $1;
 	} | error SCAPE {
 		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
 		Exception.exceptionList.push(e);
@@ -165,6 +181,30 @@ SCAPE
 		$$ = $1;
 	} | close_brace {
 		$$ = $1;
+	}
+;
+
+FOR_SENTENCE
+	: for open_par EXPRESSION semicolon EXPRESSION semicolon EXPRESSION close_par INSTRUCTIONS_BLOCK {
+		$$ = new For()
+	}
+;
+
+DO_WHILE_SENTENCE 
+	: do INSTRUCTIONS_BLOCK while open_par EXPRESSION close_par semicolon {
+		$$ = new Do_While(NodeName.DO_WHILE, String($1), @1.first_line, (@1.first_column + 1), [$2, $5]);
+	}
+;
+
+INCREMENTAL: IDENTIFIER MINUS_PLUS
+	| MINUS_PLUS IDENTIFIER
+;
+
+MINUS_PLUS
+	: plus plus {
+
+	} | minus minus {
+
 	}
 ;
 
@@ -302,6 +342,9 @@ EXPRESSION
 		$$ = new Expression([pd]);
 	} | char {
 		var pd = new PrimitiveData(NodeName.CHAR, String($1), @1.first_line, (@1.first_column + 1), NodeReturnType.CHAR);
+		$$ = new Expression([pd]);
+	} | string_tk {
+		var pd = new PrimitiveData(NodeName.STRING, String($1), @1.first_line, (@1.first_column + 1), NodeReturnType.STRING);
 		$$ = new Expression([pd]);
 	} | struct {
 		var s = new PrimitiveData(NodeName.STRUCT, Struct($1), @1.first_line, (@1.first_column + 1), NodeReturnType.STRUCT);

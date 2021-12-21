@@ -80,6 +80,7 @@ class NodeName{
     public static readonly ID_LIST = 79;
     public static readonly TYPE = 80;
     public static readonly ID = 81;
+    public static readonly DO_WHILE = 82;
 
     public static readonly nodeName = [
         "DOT",
@@ -162,7 +163,8 @@ class NodeName{
         "INSTRUCTIONS",
         "ID_LIST",
         "TYPE",
-        "ID"
+        "ID",
+        "DO_WHILE"
     ];
 
     constructor(){
