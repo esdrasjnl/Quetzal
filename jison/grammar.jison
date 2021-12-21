@@ -7,6 +7,7 @@
 %lex
 
 %options case-sensitive
+%x STRING
 
 %%
 /* COMMENTS */
@@ -25,7 +26,6 @@
 "{"                  return 'open_brace';
 "}"                  return 'close_brace';
 "#"                  return 'copy';
-"="					 return 'equal_simple';
 /* ARITHMETIC OPERATORS */
 "+"                  return 'plus';
 "-"                  return 'minus';
@@ -99,13 +99,24 @@
 [ \r\t]+            {}
 \n                  {}
 /* REGEX */
-[0-9]+("."[0-9]+)\b    return 'DOUBLE';
-[0-9]+\b                return 'INTEGER';
-(_[a-zA-Z])[a-zA-Z0-9_]* return 'IDENTIFIERT';
+[0-9]+("."[0-9]+)\b        return 'DOUBLE';
+[0-9]+\b                   return 'INTEGER';
+[a-zA-Z_][a-zA-Z0-9_]*\b   return 'IDENTIFIER';
+
+["]                           {    string = ""; this.begin("STRING"); }
+[']                           {    string = ""; this.begin("STRING"); }
+<STRING>\"                   %{    this.begin('INITIAL'); yytext=""; yytext=string;  return 'string_tk'; %}      
+<STRING>[\']                 %{    this.begin('INITIAL'); yytext=""; yytext=string;  return 'string_tk'; %}      
+<STRING>[^\n\r\"\\']+        %{    string+=yytext;  %}
+<STRING>'\t'                 %{    string+="\t";    %}
+<STRING>'\n'                 %{    string+="\n";    %}
+<STRING>'\r'                 %{    string+="\r";    %}
+<STRING>'\\"'                %{    string+='\"';    %}
+<STRING>'\\'                 %{    string+='\\';    %}
 
 <<EOF>>                 return 'EOF';
 
-. {
+.+ {
 	var e = new Exception(yytext, yylloc.first_line, (yylloc.first_column + 1), ExceptionType.LEXICAL);
 	Exception.exceptionList.push(e);
 }
@@ -130,6 +141,7 @@
 
 START
 	: INSTRUCTIONS EOF {
+		$1.name = NodeName.ROOT;
 		return $1;
 	} 
 ;
@@ -143,6 +155,27 @@ INSTRUCTIONS
 	}
 ;
 
+INSTRUCTION
+	: PRINT_INST semicolon {
+		$$ = $1;
+	} | IF_SENTENCE {
+		$$ = $1;
+	} | WHILE_SENTENCE {
+		$$ = $1;
+	} | DECLARATION semicolon {
+		$$ = $1;
+	} | ASSINGMENT semicolon {
+		$$ = $1;
+	} | FOR_SENTENCE {
+		$$ = $1;
+	} | DO_WHILE_SENTENCE {
+		$$ = $1;
+	} | error SCAPE {
+		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
+		Exception.exceptionList.push(e);
+	}
+;
+
 SCAPE
 	: semicolon {
 		$$ = $1;
@@ -151,24 +184,27 @@ SCAPE
 	}
 ;
 
-INSTRUCTION
-	: PRINT_INST semicolon {
-		$$ = $1;
-	} | IF_SENTENCE {
-		$$ = $1;
-	} | WHILE_SENTENCE {
-		$$ = $1;
-	} | error SCAPE {
-		var e = new Exception($1, @1.first_line, (@1.first_column + 1), ExceptionType.SYNTACTIC);
-		Exception.exceptionList.push(e);
-	} 
+FOR_SENTENCE
+	: for open_par EXPRESSION semicolon EXPRESSION semicolon EXPRESSION close_par INSTRUCTIONS_BLOCK {
+		$$ = new For()
+	}
 ;
 
-SCAPE
-	: semicolon {
-		$$ = $1;
-	} | close_brace {
-		$$ = $1;
+DO_WHILE_SENTENCE 
+	: do INSTRUCTIONS_BLOCK while open_par EXPRESSION close_par semicolon {
+		$$ = new Do_While(NodeName.DO_WHILE, String($1), @1.first_line, (@1.first_column + 1), [$2, $5]);
+	}
+;
+
+INCREMENTAL: IDENTIFIER MINUS_PLUS
+	| MINUS_PLUS IDENTIFIER
+;
+
+MINUS_PLUS
+	: plus plus {
+
+	} | minus minus {
+
 	}
 ;
 
@@ -181,6 +217,33 @@ PRINT_INST
 PRINT
 	: print {$$ = String($1);}
 	| print_ln {$$ = String($1);}
+;
+
+DECLARATION
+	: ATTRIBUTE_TYPE IDENTIFIER assign EXPRESSION {
+		var id = new Id(NodeName.ID, String($2), @2.first_line, (@2.first_column + 1));
+		$$ = new Declaration($1.line, $1.column, [$1, id, $4]);
+	} | ATTRIBUTE_TYPE ID_LIST {
+		$$ = new Declaration($1.line, $1.column, [$1, $2]);
+	}
+;
+
+ID_LIST
+	: ID_LIST comma IDENTIFIER {
+		var id = new Id(NodeName.ID, String($3), @3.first_line, (@3.first_column + 1));
+		$$ = $1;
+		$$.children.push(id);
+	} | IDENTIFIER {
+		var id = new Id(NodeName.ID, String($1), @1.first_line, (@1.first_column + 1));
+		$$ = new Node_(NodeName.ID_LIST, "", -1, -1, [id], new NodeData(-1, -1, -1, -1), false, false);
+	}
+;
+
+ASSINGMENT
+	: IDENTIFIER assign EXPRESSION {
+		var id = new Id(NodeName.ID, String($1), @1.first_line, (@1.first_column + 1));
+		$$ = new Assignment(@1.first_line, (@1.first_column + 1), [id, $3]);
+	}
 ;
 
 IF_SENTENCE
@@ -280,9 +343,15 @@ EXPRESSION
 	} | char {
 		var pd = new PrimitiveData(NodeName.CHAR, String($1), @1.first_line, (@1.first_column + 1), NodeReturnType.CHAR);
 		$$ = new Expression([pd]);
+	} | string_tk {
+		var pd = new PrimitiveData(NodeName.STRING, String($1), @1.first_line, (@1.first_column + 1), NodeReturnType.STRING);
+		$$ = new Expression([pd]);
 	} | struct {
 		var s = new PrimitiveData(NodeName.STRUCT, Struct($1), @1.first_line, (@1.first_column + 1), NodeReturnType.STRUCT);
 		$$ = new Expression([s]);
+	} | IDENTIFIER {
+		var id = new Id(NodeName.ID, String($1), @1.first_line, (@1.first_column + 1));
+		$$ = new Expression([id]);
 	} | open_par EXPRESSION close_par {
 		$$ = new Expression([$2]);
 	}
@@ -295,13 +364,19 @@ ATTRIBUTE_LIST
 ;
 
 ATTRIBUTE 
-	: ATTRIBUTE_TYPE IDENTIFIERT
+	: ATTRIBUTE_TYPE IDENTIFIER
 ;
 
 ATTRIBUTE_TYPE
-	: int
-	| double 
-	| boolean 
-	| char 
-	| string
+	: int {
+		$$ = new Type_($1, @1.first_line, (@1.first_column + 1));
+	} | double {
+		$$ = new Type_($1, @1.first_line, (@1.first_column + 1));
+	} | boolean {
+		$$ = new Type_($1, @1.first_line, (@1.first_column + 1));
+	} | char  {
+		$$ = new Type_($1, @1.first_line, (@1.first_column + 1));
+	} | string {
+		$$ = new Type_($1, @1.first_line, (@1.first_column + 1));
+	}
 ;

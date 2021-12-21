@@ -13,13 +13,17 @@ class Tree {
         var bodyFileTree = "";
         this.i++;
         var father = "n" + this.i;
-        if (root.getValue() != null)
-            bodyFileTree += father + "[label = \"" + root.getName() + "\\n" + root.getValue() + "\"];";
-        else
-            bodyFileTree += father + "[label = \"" + root.getName() + "\"];";
-        for (let objNode of root.getChildren()) {
-            bodyFileTree += father + " -> n" + (this.i + 1) + ";\n";
-            bodyFileTree += this.dotTree(objNode);
+        if (root != undefined) {
+            if (root.getValue() != null)
+                bodyFileTree += father + "[label = \"" + root.getName() + "\\n" + root.getValue() + "\"];";
+            else
+                bodyFileTree += father + "[label = \"" + root.getName() + "\"];";
+            for (let objNode of root.getChildren()) {
+                if (objNode != undefined) {
+                    bodyFileTree += father + " -> n" + (this.i + 1) + ";\n";
+                    bodyFileTree += this.dotTree(objNode);
+                }
+            }
         }
         return bodyFileTree;
     }

@@ -17,7 +17,32 @@ class NodeReturnType{
         "ARRAY",
     ];
 
-    constructor(){
-
+    public static getType(type: string): number{
+        switch (type) {
+            case "int":
+                return this.INTEGER;
+                break;
+            case "double":
+                return this.DOUBLE;
+                break;
+            case "boolean":
+                return this.BOOLEAN;
+                break;
+            case "String":
+                return this.STRING;
+                break;
+            case "char":
+                return this.CHAR;
+                break;
+            case "Struct":
+                return this.STRUCT;
+                break;
+            case "Array":
+                return this.ARRAY;
+                break;
+            default:
+                return this.STRING;
+                break;
+        }
     }
 }
