@@ -38,6 +38,11 @@ function run() {
   }
 }
 
+function traslate(){
+  //alert('holaa');
+  tmpEnv = new S
+}
+
 function reportAST(){
     let objTree = new Tree();
     let graficar = objTree.generateDot(root);

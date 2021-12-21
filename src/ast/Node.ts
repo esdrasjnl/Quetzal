@@ -20,7 +20,8 @@ abstract class Node_{
     }
 
     abstract run(env: Environment | null): any;
-    abstract translate(): string;
+    abstract translate(env: SymbolTableTraduction): string;
+    abstract generateSymbol(env: SymbolTableTraduction):void;
     
     public getValue():any{
         return this.value;
