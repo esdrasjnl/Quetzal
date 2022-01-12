@@ -10,4 +10,6 @@ class Print extends Node_ {
     translate() {
         return "";
     }
+    generateSymbol(env) {
+    }
 }

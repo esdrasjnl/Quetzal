@@ -21,4 +21,33 @@ class Do_While extends Node_{
     translate(): string {
         return "";
     }
+
+    generateSymbol(env: SymbolTableTraduction): void {
+        if (this.children.length > 1) {
+            this.children[0].children.forEach(child => {
+              if(child instanceof Declaration){
+                child.name_env = this.name_env + "_DoWhile";
+                child.generateSymbol(env);
+              }
+              else if(child instanceof If){
+                child.name_env = this.name_env + "_DoWhile";
+                child.generateSymbol(env);
+              }
+              else if(child instanceof Else){
+                child.name_env = this.name_env + "_DoWhile";
+                child.generateSymbol(env);
+              }
+              else if(child instanceof While){
+                child.name_env = this.name_env + "_DoWhile";
+                child.generateSymbol(env);
+              }
+              else if(child instanceof Do_While){
+                child.name_env = this.name_env + "_DoWhile";
+                child.generateSymbol(env);
+              }
+            });
+          }
+    }
+
+    
 }

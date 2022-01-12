@@ -16,4 +16,30 @@ class While extends Node_ {
     translate() {
         return "";
     }
+    generateSymbol(env) {
+        if (this.children.length > 1) {
+            this.children[1].children.forEach(child => {
+                if (child instanceof Declaration) {
+                    child.name_env = this.name_env + "_While";
+                    child.generateSymbol(env);
+                }
+                else if (child instanceof If) {
+                    child.name_env = this.name_env + "_While_If";
+                    child.generateSymbol(env);
+                }
+                else if (child instanceof Else) {
+                    child.name_env = this.name_env + "_While_Else";
+                    child.generateSymbol(env);
+                }
+                else if (child instanceof While) {
+                    child.name_env = this.name_env + "_While_While";
+                    child.generateSymbol(env);
+                }
+                else if (child instanceof Do_While) {
+                    child.name_env = this.name_env + "_While_DoWhile";
+                    child.generateSymbol(env);
+                }
+            });
+        }
+    }
 }

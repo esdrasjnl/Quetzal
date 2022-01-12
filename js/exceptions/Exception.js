@@ -16,5 +16,7 @@ class Exception extends Node_ {
     translate() {
         return "";
     }
+    generateSymbol(env) {
+    }
 }
 Exception.exceptionList = new Array();

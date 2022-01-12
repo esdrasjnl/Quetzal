@@ -7,6 +7,7 @@ abstract class Node_{
     public data: NodeData;
     private isVariable: boolean;
     private isFunction: boolean;
+    public name_env: string;
 
     constructor (name: number, value:any, line: number, column: number, children: Array<Node_>, data: NodeData, isFunction: boolean, isVariable: boolean){
         this.name = name;
@@ -17,6 +18,7 @@ abstract class Node_{
         this.data = data;
         this.isFunction = isFunction;
         this.isVariable = isVariable;
+        this.name_env = '';
     }
 
     abstract run(env: Environment | null): any;

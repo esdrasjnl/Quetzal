@@ -9,4 +9,6 @@ class Id extends Node_ {
     translate() {
         return "";
     }
+    generateSymbol(env) {
+    }
 }

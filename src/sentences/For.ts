@@ -12,4 +12,8 @@ class For extends Node_{
     translate(): string {
         return "";
     }
+
+    generateSymbol(env: SymbolTableTraduction): void {
+        
+    }
 }

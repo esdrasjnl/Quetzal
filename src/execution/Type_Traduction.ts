@@ -3,10 +3,10 @@ enum primitive{
 }
 
 enum rol{
-    VARIABLE_LOCAL,VARIABLE_GLOBAL,FUNCTION
+    VARIABLE_LOCAL,VARIABLE_GLOBAL,FUNCTION, NA
 }
 
-class Type{
+class Type_Traduction{
     public TypePrimitive: primitive;
     public RolPrimitive: rol;
 

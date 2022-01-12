@@ -185,26 +185,22 @@ SCAPE
 ;
 
 FOR_SENTENCE
-	: for open_par EXPRESSION semicolon EXPRESSION semicolon EXPRESSION close_par INSTRUCTIONS_BLOCK {
-		$$ = new For()
+	: for open_par DECL_ASSING semicolon EXPRESSION semicolon EXPRESSION close_par INSTRUCTIONS_BLOCK {
+		$$ = new For(NodeName.FOR, String($1),@1.first_line, (@1.first_column + 1),[$3, $5, $7,$9])
 	}
+;
+
+DECL_ASSING: ASSINGMENT {
+			$$ = $1
+		}
+		| DECLARATION {
+			$$ = $1
+		}
 ;
 
 DO_WHILE_SENTENCE 
 	: do INSTRUCTIONS_BLOCK while open_par EXPRESSION close_par semicolon {
 		$$ = new Do_While(NodeName.DO_WHILE, String($1), @1.first_line, (@1.first_column + 1), [$2, $5]);
-	}
-;
-
-INCREMENTAL: IDENTIFIER MINUS_PLUS
-	| MINUS_PLUS IDENTIFIER
-;
-
-MINUS_PLUS
-	: plus plus {
-
-	} | minus minus {
-
 	}
 ;
 
@@ -354,8 +350,10 @@ EXPRESSION
 		$$ = new Expression([id]);
 	} | open_par EXPRESSION close_par {
 		$$ = new Expression([$2]);
-	}
+	} | INCREMENTAL
 ;
+
+
 
 ATTRIBUTE_LIST
 	: ATTRIBUTE_LIST comma ATTRIBUTE {

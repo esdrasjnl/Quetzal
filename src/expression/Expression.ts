@@ -1,6 +1,14 @@
 class Expression extends Node_{
+    public temp:string;
+    public labelTrue:string;
+    public labelFalse:string;
+
     constructor (children: Array<Node_>){
         super(NodeName.EXPRESSION, null, -1, -1, children, new NodeData(-1, -1, -1, -1), false, false);
+        this.temp = "";
+        this.labelTrue = "";
+        this.labelFalse = "";
+
     }
 
     run(env: Environment): any {
@@ -17,6 +25,10 @@ class Expression extends Node_{
 
     translate(): string {
         return "";
+    }
+
+    generateSymbol(env: SymbolTableTraduction): void {
+        
     }
 
     public operate(n: Expression, env: Environment) {

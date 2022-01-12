@@ -10,4 +10,8 @@ class Type_ extends Node_{
     translate(): string {
         return "";
     }
+
+    generateSymbol(env: SymbolTableTraduction): void {
+        
+    }
 }

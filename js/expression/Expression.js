@@ -2,6 +2,9 @@
 class Expression extends Node_ {
     constructor(children) {
         super(NodeName.EXPRESSION, null, -1, -1, children, new NodeData(-1, -1, -1, -1), false, false);
+        this.temp = "";
+        this.labelTrue = "";
+        this.labelFalse = "";
     }
     run(env) {
         var _a, _b;
@@ -19,6 +22,8 @@ class Expression extends Node_ {
     }
     translate() {
         return "";
+    }
+    generateSymbol(env) {
     }
     operate(n, env) {
         if (n.children.length === 3) {

@@ -22,4 +22,33 @@ class If extends Node_{
     translate(): string {
         return "";
     }
+
+    generateSymbol(env: SymbolTableTraduction): void {
+        this.children[1].children.forEach(child => {
+            if(child instanceof Declaration){
+              child.name_env = this.name_env + "_If";
+              child.generateSymbol(env);
+            }
+            else if(child instanceof If){
+              child.name_env = this.name_env + "_If";
+              child.generateSymbol(env);
+            }
+            else if(child instanceof Else){
+              child.name_env = this.name_env + "_If";
+              child.generateSymbol(env);
+            }
+            else if(child instanceof While){
+              child.name_env = this.name_env + "_If";
+              child.generateSymbol(env);
+            }
+            else if(child instanceof Do_While){
+              child.name_env = this.name_env + "_If";
+              child.generateSymbol(env);
+            }
+          });
+
+        if (this.children.length == 3) {
+            this.children[2].generateSymbol(env);
+          }
+    }
 }

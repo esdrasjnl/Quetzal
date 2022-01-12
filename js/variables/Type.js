@@ -9,4 +9,6 @@ class Type_ extends Node_ {
     translate() {
         return "";
     }
+    generateSymbol(env) {
+    }
 }

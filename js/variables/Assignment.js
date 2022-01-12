@@ -12,4 +12,6 @@ class Assignment extends Node_ {
     translate() {
         return "";
     }
+    generateSymbol(env) {
+    }
 }

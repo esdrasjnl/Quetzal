@@ -9,6 +9,7 @@ class Node_ {
         this.data = data;
         this.isFunction = isFunction;
         this.isVariable = isVariable;
+        this.name_env = '';
     }
     getValue() {
         return this.value;

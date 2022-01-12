@@ -6,5 +6,6 @@ class SymbolTraduction {
         this.position = position;
         this.isGlobal = isGlobal;
         this.type = type;
+        this.map = new Map();
     }
 }
